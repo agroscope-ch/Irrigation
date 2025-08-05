@@ -1,0 +1,633 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>function compute_balance &#8212; Irrigation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'function_display';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Bibliography" href="Bibliography.html" />
+    <link rel="prev" title="Function balance" href="documentation.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/AgroscopeLogo.png" class="logo__image only-light" alt="Irrigation - Home"/>
+    <script>document.write(`<img src="_static/AgroscopeLogo.png" class="logo__image only-dark" alt="Irrigation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Irrigation
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="input_parameters.html">Input parameters and units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation.html">Function <code class="docutils literal notranslate"><span class="pre">balance</span></code></a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">function <code class="docutils literal notranslate"><span class="pre">compute_balance</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Ffunction_display.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/function_display.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>function compute_balance</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="function-compute-balance">
+<h1>function <code class="docutils literal notranslate"><span class="pre">compute_balance</span></code><a class="headerlink" href="#function-compute-balance" title="Link to this heading">#</a></h1>
+<p>Below, you can find the R code for the function <code class="docutils literal notranslate"><span class="pre">balance_computation</span></code>. It uses</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1">### Function to compute the balance</span>
+<span class="n">balance_computation</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">Rel</span><span class="p">,</span><span class="w"> </span><span class="n">ET</span><span class="p">,</span><span class="w"> </span><span class="n">Rad</span><span class="p">,</span><span class="w"> </span><span class="n">Temp</span><span class="p">,</span><span class="w"> </span><span class="n">Rain</span><span class="p">,</span><span class="w"> </span><span class="n">DOY</span><span class="p">,</span>
+<span class="w">                                </span><span class="n">start_flowering</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">109</span><span class="p">,</span><span class="w">  </span><span class="n">DayFolAreaMax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">171</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                                </span><span class="n">net_rain_effect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">.</span><span class="m">66</span><span class="p">,</span><span class="w"> </span><span class="n">RAW</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">32</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                                </span><span class="n">method_leaf_dev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span>
+<span class="w">  </span><span class="c1"># Rel is relative humidity (in %)</span>
+<span class="w">  </span><span class="c1"># ET is Evapotranspiration</span>
+<span class="w">  </span><span class="c1"># Rad is solar radiation in W/m^2</span>
+<span class="w">  </span><span class="c1"># Temp is temperature in Celsius degrees</span>
+<span class="w">  </span><span class="c1"># Rain is rainfall in mm</span>
+<span class="w">  </span><span class="c1"># DOY is the day of the year</span>
+<span class="w">  </span><span class="c1"># start_flowering is the date (in day of year) of the beggining of the flowering</span>
+<span class="w">  </span><span class="c1"># default value (109) corresponds approximately to 21.04 (in day of the year)</span>
+<span class="w">  </span>
+<span class="w">  </span><span class="c1"># theDayFolAreaMax is the date (in day of year) where the maximum leaf surface is reached</span>
+<span class="w">  </span><span class="c1"># default value (171) corresponds approximately to 20.06 (in day of the year)</span>
+<span class="w">  </span>
+<span class="w">  </span><span class="c1"># net_rain_effect is the coefficient that impacts the rainfall due to the nets</span>
+<span class="w">  </span><span class="c1"># RAW is the Readily Available Water.</span>
+<span class="w">  </span><span class="c1"># method_leaf_dev: at the moment, only one method is used </span>
+
+<span class="w">  </span><span class="c1">## See equation (1) and paragraph below for constants</span>
+<span class="w">  </span><span class="c1">## alpha =1.26 is given in the end of the section 1</span>
+<span class="w">  </span><span class="n">alph</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.26</span><span class="w"> </span><span class="c1">#  is the Priestley–Taylor parameter/constant.</span>
+<span class="w">  </span><span class="n">gamm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.066</span><span class="w"> </span><span class="c1"># [kPa/°C] is the psychrometric coefficient</span>
+<span class="w">  </span><span class="n">lam</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2.45</span><span class="c1">#  [MJ/L] is the latent heat  of vaporization; </span>
+<span class="w">  </span><span class="c1"># A [MJ/ (tree * day)]  is the total amount of net  (all-wave) radiation absorbed by the leaf canopy; </span>
+<span class="w">  </span>
+<span class="w">  </span><span class="c1"># start_flowering = </span>
+<span class="w">  </span><span class="c1"># DayFolAreaMax = 171 # Day when the max of the leaf surface is reached, in day of the year</span>
+<span class="w">  </span>
+<span class="w">  </span>
+<span class="w">  </span><span class="c1"># the slope of the saturation vapor pressure curve at average daily air temperature</span>
+<span class="w">  </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4098</span><span class="o">*</span><span class="m">0.6108</span><span class="o">*</span><span class="nf">exp</span><span class="p">(</span><span class="w"> </span><span class="p">(</span><span class="m">17.27</span><span class="o">*</span><span class="n">Temp</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">Temp</span><span class="m">+237.3</span><span class="p">))</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">Temp</span><span class="m">+237.3</span><span class="p">)</span><span class="o">^</span><span class="m">2</span>
+<span class="w">  </span>
+<span class="w">  </span><span class="n">DFlowering</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DOY</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start_flowering</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="w">  </span><span class="c1"># day counts starting from flowering</span>
+<span class="w">  </span><span class="c1"># Q and Q2 are defined in sheet Dynamique_Sfol as a second order polynomial regression</span>
+<span class="w">  </span><span class="c1"># REFERENCE for the reference points used in the regression? </span>
+<span class="w">  </span><span class="n">Q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="m">-0.000881834215</span><span class="o">*</span><span class="n">DFlowering</span><span class="w"> </span><span class="o">^</span><span class="m">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">0.150793650794</span><span class="o">*</span><span class="n">DFlowering</span><span class="p">)</span><span class="o">/</span><span class="m">6</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="c1"># in percent</span>
+<span class="w">  </span><span class="n">Q2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="m">-0.001444</span><span class="o">*</span><span class="n">DFlowering</span><span class="o">^</span><span class="m">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">0.17</span><span class="o">*</span><span class="n">DFlowering</span><span class="p">)</span><span class="o">/</span><span class="m">5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">100</span>
+<span class="w">  </span><span class="n">Q2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">ifelse</span><span class="p">(</span><span class="n">Q2</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">100</span><span class="p">,</span><span class="w"> </span><span class="n">yes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">100</span><span class="p">,</span><span class="w"> </span><span class="n">no</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Q2</span><span class="w"> </span><span class="p">)</span>
+<span class="w">  </span>
+<span class="w">  </span><span class="kr">if</span><span class="p">(</span><span class="n">method_leaf_dev</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="n">Q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Q2</span><span class="p">;</span>
+<span class="w">  </span><span class="c1"># REFERENCE and definition of LAIMax? </span>
+<span class="w">  </span><span class="n">LAIMaxPercent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">case_when</span><span class="p">(</span>
+<span class="w">    </span><span class="n">DOY</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">start_flowering</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">DOY</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">1.612903</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">175.806452</span><span class="p">,</span><span class="w"> </span><span class="c1"># linear interpolation through the</span>
+<span class="w">    </span><span class="c1"># 2 points (109, 0) and (171, 100); </span>
+<span class="w">    </span><span class="n">DOY</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">start_flowering</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">DOY</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">DayFolAreaMax</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">Q</span><span class="p">,</span>
+<span class="w">    </span><span class="n">DOY</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">DayFolAreaMax</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">DOY</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">252</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="m">100</span><span class="p">,</span>
+<span class="w">    </span><span class="n">DOY</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="m">252</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">DOY</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">-0.7843</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">297.65</span><span class="p">,</span>
+<span class="w">    </span><span class="n">.default</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NULL</span>
+<span class="w">  </span><span class="p">)</span>
+<span class="w">  </span><span class="n">LAIMax</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">LAIMaxPercent</span><span class="o">/</span><span class="m">100</span>
+<span class="w">  </span><span class="c1"># Explanation about the 5 columns ranging from 0.5 to 2.5?</span>
+<span class="w">  </span><span class="n">LA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">outer</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="w"> </span><span class="n">LAIMax</span><span class="p">,</span><span class="w"> </span><span class="n">Y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="o">*</span><span class="nf">seq</span><span class="p">(</span><span class="n">from</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="o">=</span><span class="m">2.5</span><span class="p">,</span><span class="w"> </span><span class="n">by</span><span class="o">=</span><span class="w"> </span><span class="n">.</span><span class="m">5</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">()</span>
+<span class="w">  </span><span class="nf">names</span><span class="p">(</span><span class="n">LA</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">paste</span><span class="p">(</span><span class="s">&quot;LA_&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span><span class="n">sep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">)</span>
+<span class="w">  </span><span class="c1"># Conversion of units: REFERENCE?</span>
+<span class="w">  </span><span class="n">Rs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Rad</span><span class="o">/</span><span class="p">(</span><span class="m">1000000</span><span class="o">/</span><span class="m">86400</span><span class="p">)</span><span class="w"> </span><span class="c1"># changing units of solar radiation</span>
+<span class="w">  </span><span class="c1"># RN according to Calanca (PLEASE, FIND REFERENCE) Transformation of global radiation into useful </span>
+<span class="w">  </span><span class="c1"># radiation (apparently valid on the Swiss Plateau)  Rn = Rs *0.617-1.004 </span>
+<span class="w">  </span><span class="n">Rn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Rs</span><span class="w"> </span><span class="o">*</span><span class="m">0.617-1.004</span><span class="w"> </span>
+<span class="w">  </span><span class="c1"># Why 0.303? REFERENCE</span>
+<span class="w">  </span><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">.</span><span class="m">303</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">LA</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Rn</span><span class="w"> </span><span class="c1">## Rn * LA per tree</span>
+<span class="w">  </span><span class="nf">names</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">paste</span><span class="p">(</span><span class="s">&quot;A_&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span><span class="n">sep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">)</span>
+<span class="w">  </span><span class="c1"># IS THAT THE PRISTLEY-TALYOR FORMULA? IF YES, CITE ORIGINAL REFERENCE AND PEREIRA ET AL. (2007)</span>
+<span class="w">  </span><span class="c1"># daily sap flow of a tree [l/(TREE * DAY)], denoted by T in the paper</span>
+<span class="w">  </span><span class="n">Daily_sap_flow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alph</span><span class="o">*</span><span class="p">(</span><span class="n">s</span><span class="o">/</span><span class="p">(</span><span class="n">s</span><span class="o">+</span><span class="n">gamm</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="m">1</span><span class="o">/</span><span class="n">lam</span><span class="p">))</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">A</span>
+<span class="w">  </span><span class="nf">names</span><span class="p">(</span><span class="n">Daily_sap_flow</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">paste</span><span class="p">(</span><span class="s">&quot;Tc_&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span><span class="n">sep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">)</span>
+<span class="w">  </span><span class="c1"># REFERENCE OR DEFINITION. WHY FACTOR 5?</span>
+<span class="w">  </span><span class="n">Irrigation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Daily_sap_flow</span><span class="o">/</span><span class="m">5</span>
+<span class="w">  </span><span class="nf">names</span><span class="p">(</span><span class="n">Irrigation</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste</span><span class="p">(</span><span class="s">&quot;Irrig_&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span><span class="n">sep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">)</span>
+<span class="w">  </span><span class="c1"># REFERENCE? Why the factor 5?</span>
+<span class="w">  </span><span class="n">T_Eto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Daily_sap_flow</span><span class="o">/</span><span class="p">(</span><span class="m">5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">ET</span><span class="p">)</span>
+<span class="w">  </span><span class="n">T_Eto</span><span class="p">[</span><span class="n">ET</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">0</span><span class="p">,]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="c1"># treat the values where ET is 0 as 0 (to avoid division by 0)</span>
+<span class="w">  </span>
+<span class="w">  </span><span class="c1"># REFERENCE/EXPLANATION  FOR THIS 3RD ORDER POLYNOMIAL REGRESSION</span>
+<span class="w">  </span><span class="n">DOY_05_fun</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="m">0.000000011</span><span class="o">*</span><span class="n">x</span><span class="o">^</span><span class="m">3</span><span class="w">  </span><span class="o">-</span><span class="w"> </span><span class="m">0.000008737</span><span class="o">*</span><span class="n">x</span><span class="o">^</span><span class="m">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">0.000824346</span><span class="o">*</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">0.379581098</span><span class="w"> </span>
+<span class="w">  </span><span class="n">DOY_1_fun</span><span class="w">  </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="m">0.000000032</span><span class="o">*</span><span class="n">x</span><span class="o">^</span><span class="m">3</span><span class="w">  </span><span class="o">-</span><span class="w"> </span><span class="m">0.000015482</span><span class="o">*</span><span class="n">x</span><span class="o">^</span><span class="m">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">0.000862181</span><span class="o">*</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">0.396966905</span>
+<span class="w">  </span><span class="n">DOY_15_fun</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="m">0.000000033</span><span class="o">*</span><span class="n">x</span><span class="o">^</span><span class="m">3</span><span class="w">  </span><span class="o">-</span><span class="w"> </span><span class="m">0.00001409</span><span class="o">*</span><span class="n">x</span><span class="o">^</span><span class="m">2</span><span class="w">  </span><span class="o">-</span><span class="w"> </span><span class="m">0.000000916</span><span class="o">*</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">0.443715597</span>
+<span class="w">  </span><span class="n">DOY_2_fun</span><span class="w">  </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="m">0.000000023</span><span class="o">*</span><span class="n">x</span><span class="o">^</span><span class="m">3</span><span class="w">  </span><span class="o">-</span><span class="w"> </span><span class="m">0.000005712</span><span class="o">*</span><span class="n">x</span><span class="o">^</span><span class="m">2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">0.002115453</span><span class="o">*</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">0.541917785</span>
+<span class="w">  </span><span class="n">DOY_25_fun</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="m">-0.000000023</span><span class="o">*</span><span class="n">x</span><span class="o">^</span><span class="m">3</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">0.000021998</span><span class="o">*</span><span class="n">x</span><span class="o">^</span><span class="m">2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">0.0070441</span><span class="o">*</span><span class="n">x</span><span class="w">   </span><span class="o">+</span><span class="w"> </span><span class="m">0.745096926</span>
+<span class="w">  </span><span class="c1"># Define and REFERENCE</span>
+<span class="w">  </span><span class="n">Evap</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lapply</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="n">DOY_05_fun</span><span class="p">,</span><span class="n">DOY_1_fun</span><span class="p">,</span><span class="w"> </span><span class="n">DOY_15_fun</span><span class="p">,</span><span class="n">DOY_2_fun</span><span class="p">,</span><span class="w"> </span><span class="n">DOY_25_fun</span><span class="p">),</span><span class="w"> </span>
+<span class="w">                 </span><span class="n">FUN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">z</span><span class="p">)</span><span class="nf">z</span><span class="p">(</span><span class="n">DOY</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">ET</span><span class="p">)</span>
+<span class="w">  </span><span class="n">Evap</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">do.call</span><span class="p">(</span><span class="n">cbind</span><span class="p">,</span><span class="w"> </span><span class="n">args</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Evap</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">()</span>
+<span class="w">  </span><span class="nf">names</span><span class="p">(</span><span class="n">Evap</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste</span><span class="p">(</span><span class="s">&quot;Evap_&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span><span class="n">sep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">)</span>
+<span class="w">  </span><span class="c1"># Corresponds to columns T in the sheet but using T alone is not possible</span>
+<span class="w">  </span><span class="c1"># (it has another meaning in R)</span>
+<span class="w">  </span><span class="n">Tmat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LAIMax</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Irrigation</span>
+<span class="w">  </span><span class="n">Tmat</span><span class="p">[</span><span class="n">LAIMax</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">0</span><span class="p">,]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0</span>
+<span class="w">  </span><span class="n">ETc_ETo</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="p">(</span><span class="n">Tmat</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Evap</span><span class="p">)</span><span class="o">/</span><span class="n">ET</span>
+<span class="w">  </span><span class="n">ETc_ETo</span><span class="p">[</span><span class="n">ET</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">0</span><span class="p">,]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0</span>
+<span class="w">  </span><span class="c1"># first, we create the condition to be verified:</span>
+<span class="w">  </span><span class="c1"># to be usefull, rainfall must be at least of 5mm over the past 2 days.</span>
+<span class="w">  </span><span class="c1"># Then, the useful rainfall by day is the rainfall provided that </span>
+<span class="w">  </span><span class="c1"># this condition (&gt;5mm in the past 2 days) is met.</span>
+<span class="w">  </span><span class="n">RainfallUseful</span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">Rain</span><span class="p">[</span><span class="m">1</span><span class="p">],</span>
+<span class="w">                     </span><span class="n">Rain</span><span class="p">[</span><span class="m">2</span><span class="o">:</span><span class="nf">length</span><span class="p">(</span><span class="n">Rain</span><span class="p">)]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<span class="w">                       </span><span class="n">Rain</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="p">(</span><span class="nf">length</span><span class="p">(</span><span class="n">Rain</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">1</span><span class="p">)]</span><span class="w"> </span><span class="c1"># lagged rainfall</span>
+<span class="w">  </span><span class="p">)</span>
+<span class="w">  </span><span class="c1"># Usefull rainfall</span>
+<span class="w">  </span><span class="n">RainfallUseful</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">ifelse</span><span class="p">(</span><span class="n">RainfallUseful</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="n">yes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Rain</span><span class="p">,</span><span class="w"> </span><span class="n">no</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">)</span>
+<span class="w">  </span><span class="c1"># We initialize the matrix Balance</span>
+<span class="w">  </span><span class="n">Balance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">RainfallUseful</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">net_rain_effect</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">(</span><span class="n">Tmat</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Evap</span><span class="p">)</span>
+<span class="w">  </span><span class="c1"># We initialize the first value of the Balance</span>
+<span class="w">  </span><span class="c1"># REFERENCE/EXPLANATION</span>
+<span class="w">  </span><span class="n">Balance</span><span class="p">[</span><span class="m">1</span><span class="p">,]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">RainfallUseful</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">ET</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">Tmat</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Evap</span><span class="p">)[</span><span class="m">1</span><span class="p">,]</span>
+<span class="w">  </span><span class="c1"># we define a custom function to truncate values in a given interval</span>
+<span class="w">  </span><span class="n">truncation</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RAW</span><span class="p">)</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nf">ifelse</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">yes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">no</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">ifelse</span><span class="p">(</span><span class="n">x</span><span class="o">&lt;</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">yes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">no</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">))</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="c1"># we iteratively update the values by adding the preceeding values and then</span>
+<span class="w">  </span><span class="c1"># truncate it to the interval [0, RAW = 32]</span>
+<span class="w">  </span><span class="kr">for</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">2</span><span class="o">:</span><span class="nf">nrow</span><span class="p">(</span><span class="n">Balance</span><span class="p">))</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Balance</span><span class="p">[</span><span class="n">i</span><span class="p">,]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">truncation</span><span class="p">(</span><span class="n">Balance</span><span class="p">[</span><span class="n">i</span><span class="p">,]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Balance</span><span class="p">[</span><span class="n">i</span><span class="m">-1</span><span class="p">,])</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="nf">names</span><span class="p">(</span><span class="n">Balance</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste</span><span class="p">(</span><span class="s">&quot;Balance_res_&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span><span class="n">sep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">)</span>
+<span class="w">  </span><span class="n">Irrigation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Tmat</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Evap</span>
+<span class="w">  </span><span class="n">Irrigation</span><span class="p">[</span><span class="n">Balance</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+<span class="w">  </span><span class="nf">names</span><span class="p">(</span><span class="n">Irrigation</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste</span><span class="p">(</span><span class="s">&quot;Irrigation_&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span><span class="n">sep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">)</span>
+<span class="w">  </span><span class="n">RainfallUseful</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">net_rain_effect</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">(</span><span class="n">Tmat</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Evap</span><span class="p">)</span>
+<span class="w">  </span><span class="c1"># a simple moving average function of lag = n</span>
+<span class="w">  </span><span class="n">ma</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">vec</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="nf">sapply</span><span class="p">(</span><span class="m">5</span><span class="o">:</span><span class="nf">length</span><span class="p">(</span><span class="n">vec</span><span class="p">),</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+<span class="w">    </span><span class="nf">mean</span><span class="p">(</span><span class="n">vec</span><span class="p">[(</span><span class="n">z</span><span class="o">-</span><span class="n">n</span><span class="p">)</span><span class="o">:</span><span class="p">(</span><span class="n">z</span><span class="m">-1</span><span class="p">)]))</span>
+<span class="w">  </span><span class="n">SmoothedIrrigation</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="n">Irrigation</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                              </span><span class="kr">function</span><span class="p">(</span><span class="n">z</span><span class="p">)</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="nf">rep</span><span class="p">(</span><span class="kc">NA</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="nf">ma</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="p">)))</span>
+<span class="w">  </span><span class="n">SmoothedIrrigation</span><span class="p">[</span><span class="n">Balance</span><span class="w"> </span><span class="o">&gt;</span><span class="m">3</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0</span>
+<span class="w">  </span>
+<span class="w">  </span><span class="kr">return</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">LAIMaxPercent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LAIMaxPercent</span><span class="p">,</span><span class="w"> </span><span class="n">Rn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Rn</span><span class="p">,</span><span class="w"> </span>
+<span class="w">              </span><span class="n">Daily_sap_flow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Daily_sap_flow</span><span class="p">,</span><span class="w"> </span><span class="n">Evap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Evap</span><span class="p">,</span><span class="w"> </span><span class="n">Tmat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Tmat</span><span class="p">,</span>
+<span class="w">              </span><span class="n">ETc_ETo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ETc_ETo</span><span class="p">,</span><span class="w"> </span><span class="n">RainfallUseful</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RainfallUseful</span><span class="p">,</span>
+<span class="w">              </span><span class="n">Balance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Balance</span><span class="p">,</span><span class="w"> </span><span class="n">Irrigation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Irrigation</span><span class="p">,</span>
+<span class="w">              </span><span class="n">SmoothedIrrigation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SmoothedIrrigation</span><span class="p">))</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="documentation.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Function <code class="docutils literal notranslate"><span class="pre">balance</span></code></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Bibliography.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Bibliography</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Philippe Monney and Matthieu Wilhelm
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

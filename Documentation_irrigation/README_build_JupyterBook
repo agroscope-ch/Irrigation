@@ -1,0 +1,4 @@
+# activate the venv
+source myenv/bin/activate
+# build the book
+jupyter-book build Documentation_irrigation/
