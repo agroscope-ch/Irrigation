@@ -1,0 +1,851 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Description of the algorithm &#8212; Irrigation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'descr_algorithm';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="\(\texttt{balance_computation}\) R function" href="function_display.html" />
+    <link rel="prev" title="Input parameters and units" href="input_parameters.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/AgroscopeLogo.png" class="logo__image only-light" alt="Irrigation - Home"/>
+    <script>document.write(`<img src="_static/AgroscopeLogo.png" class="logo__image only-dark" alt="Irrigation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Irrigation
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="input_parameters.html">Input parameters and units</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Description of the algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="function_display.html"><span class="math notranslate nohighlight">\(\texttt{balance_computation}\)</span> R function</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fdescr_algorithm.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/descr_algorithm.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Description of the algorithm</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#input-parameters">Input Parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computation-steps">Computation Steps</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#slope-of-the-saturation-vapor-pressure-curve">1. Slope of the saturation vapor pressure curve</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#leaf-area">2. Leaf area</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#net-radiation">3. Net radiation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-absorbed-by-the-canopy">4. Energy absorbed by the canopy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sap-flow-by-tree-actual-transpiration">5. Sap flow by tree (actual transpiration)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#soil-evaporation">6. Soil evaporation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#useful-rainfall">7. Useful rainfall</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#raw-water-balance">8. Raw water balance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#irrigation">9. Irrigation</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="description-of-the-algorithm">
+<h1>Description of the algorithm<a class="headerlink" href="#description-of-the-algorithm" title="Link to this heading">#</a></h1>
+<p>This R function calculates the <strong>water balance</strong> of a plant based on meteorological variables, agronomic parameters, and empirical models.
+The <strong>balance</strong> corresponds to the difference between water inputs (rainfall, irrigation) and estimated needs (evapotranspiration, sap flow).</p>
+<hr class="docutils" />
+<section id="input-parameters">
+<h2>Input Parameters<a class="headerlink" href="#input-parameters" title="Link to this heading">#</a></h2>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">balance_computation</span><span class="p">(</span><span class="n">Rel</span><span class="p">,</span><span class="w"> </span><span class="n">ET</span><span class="p">,</span><span class="w"> </span><span class="n">Rad</span><span class="p">,</span><span class="w"> </span><span class="n">Temp</span><span class="p">,</span><span class="w"> </span><span class="n">Rain</span><span class="p">,</span><span class="w"> </span><span class="n">DOY</span><span class="p">,</span>
+<span class="w">                    </span><span class="n">start_flowering</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">109</span><span class="p">,</span><span class="w"> </span><span class="n">DayFolAreaMax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">171</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                    </span><span class="n">net_rain_effect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.66</span><span class="p">,</span><span class="w"> </span><span class="n">RAW</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">32</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                    </span><span class="n">method_leaf_dev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>For more details about the input parameters, see the <a class="reference internal" href="input_parameters.html#section-input-parameters"><span class="std std-ref">previous section</span></a></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Rel</span></code></p></td>
+<td><p>Relative humidity (%).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ET</span></code></p></td>
+<td><p>Evapotranspiration (mm/day).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Rad</span></code></p></td>
+<td><p>Global radiation (W/m²).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Temp</span></code></p></td>
+<td><p>Temperature (°C).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Rain</span></code></p></td>
+<td><p>Daily rainfall (mm).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">DOY</span></code></p></td>
+<td><p>Day of the year.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">start_flowering</span></code></p></td>
+<td><p>Day of year when flowering starts (default 109).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">DayFolAreaMax</span></code></p></td>
+<td><p>DOY when leaf area peaks (default 171).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">net_rain_effect</span></code></p></td>
+<td><p>Reduction factor of rainfall due to nets.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">RAW</span></code></p></td>
+<td><p>Readily Available Water (mm).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">method_leaf_dev</span></code></p></td>
+<td><p>Method to compute leaf development (1 or 2).</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="computation-steps">
+<h2>Computation Steps<a class="headerlink" href="#computation-steps" title="Link to this heading">#</a></h2>
+<p>In what follows, the variables \texttt{Rel}, \texttt{ET}, \texttt{Rad}, \texttt{Temp} and \texttt{Rain} are all <strong>daily measurements</strong>. It means that, when they are used in the following, they are implicitely depending on the day of the year. When it is useful, we use the index <span class="math notranslate nohighlight">\(t\)</span> to denote the current day, <span class="math notranslate nohighlight">\(t-1\)</span> to denote the previous one and <span class="math notranslate nohighlight">\(t_0\)</span> to denote the first day when the measurements start.</p>
+<p>We will use the Priestley–Taylor formula, that reads as follows:</p>
+<div class="math notranslate nohighlight">
+\[
+T_c = \alpha \cdot \left( \frac{s}{s + \gamma} \cdot \frac{1}{\lambda} \right) \cdot A,
+\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\alpha = 1.26\)</span>: Priestley–Taylor parameter</p></li>
+<li><p><span class="math notranslate nohighlight">\(\gamma = 0.066 \, \text{kPa}/^\circ \text{C}\)</span>: Psychrometric coefficient</p></li>
+<li><p><span class="math notranslate nohighlight">\(\lambda = 2.45 \, \text{MJ}/\text{kg}\)</span>: Latent heat of vaporization</p></li>
+<li><p><span class="math notranslate nohighlight">\(s = s(\texttt{Temp})\)</span> is the slope of the saturation vapor pressure curve in terms of the average daily temperature \texttt{Temp}.</p></li>
+<li><p><span class="math notranslate nohighlight">\(A [\text{MJ}\cdot \text{tree}^{-1} \cdot \text{day}^{-1}]\)</span> is the total amount of net  (all-wave) radiation absorbed by the leaf canopy;</p></li>
+</ul>
+<p>The first is to compute the slope of the saturation vapor pressure. The steps 2 to 5 will be dedicated to the determination of <span class="math notranslate nohighlight">\(A\)</span>.</p>
+<section id="slope-of-the-saturation-vapor-pressure-curve">
+<h3>1. Slope of the saturation vapor pressure curve<a class="headerlink" href="#slope-of-the-saturation-vapor-pressure-curve" title="Link to this heading">#</a></h3>
+<p>We use the formula provided in the <a class="reference external" href="https://www.fao.org/4/x0490e/x0490e07.htm#atmospheric%20parameters">FAO report</a>, equation (13) to compute the slope of the saturation vapor pressure curve at average daily air temperature:</p>
+<div class="math notranslate nohighlight">
+\[
+s = \dfrac{4098 \times 0.6108 \times \exp\left(\frac{17.27 \ \texttt{Temp}}{\texttt{Temp} + 237.3}\right)}{(\texttt{Temp} + 237.3)^2},
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(T\)</span> is the daily average temperature in <span class="math notranslate nohighlight">\(°C\)</span>.</p>
+</section>
+<hr class="docutils" />
+<section id="leaf-area">
+<h3>2. Leaf area<a class="headerlink" href="#leaf-area" title="Link to this heading">#</a></h3>
+<p>To compute the leaf area, we first determine a leaf area index (LAI), and then, according to the age and the plant density, we attribute it to one of the five categories (0.5, 1, …, 2.5), from which we deduce the leaf area by tree
+Indeed, based on an estimate of LAI, leaf area per tree (LA) is obtained as LA = LAI * 5 if we refer to a standard planting density of 2000 tree-ha where each tree occupies 5m2 of soil (thus corresponding in the following to the parameter <span class="math notranslate nohighlight">\(k = 1\)</span>).
+Let <span class="math notranslate nohighlight">\(D = \texttt{DOY} - \texttt{start}_\texttt{flowering} + 1\)</span>. Then, we define</p>
+<div class="math notranslate nohighlight">
+\[
+Q = \left(-0.00088183 \cdot D^2 + 0.15079 \cdot D\right)/6 \cdot 100.
+\]</div>
+<p>Finaly, we define</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\text{LAI}^{\%}_\text{max} =
+\begin{cases}
+\texttt{DOY} \cdot 1.612903 - 175.806452, &amp; \text{if } \texttt{DOY} &lt; \texttt{start}_\texttt{flowering}, \\
+Q, &amp; \text{if } \texttt{start_flowering} \leq \texttt{DOY} &lt; \texttt{DayFolAreaMay}, \\
+100, &amp; \text{if } \texttt{DayFolAreaMay} \leq \texttt{DOY} &lt; 252, \\
+\texttt{DOY} \cdot -0.7843 + 297.65, &amp; \text{if } \texttt{DOY} \geq 252.
+\end{cases}
+\end{split}\]</div>
+<p>Interpolation logic:</p>
+<ul class="simple">
+<li><p>Linear before <span class="math notranslate nohighlight">\(\texttt{start}_\texttt{flowering}\)</span></p></li>
+<li><p>Polynomial between <span class="math notranslate nohighlight">\(\texttt{start}_\texttt{flowering}\)</span> and \texttt{DayFolAreaMax}</p></li>
+<li><p>Constant at 100% between \texttt{DayFolAreaMax} and \texttt{DOY} = 252</p></li>
+<li><p>Then linearly decreasing</p></li>
+</ul>
+<p>We then transform it back to a proportion (and not a percentage)</p>
+<div class="math notranslate nohighlight">
+\[
+\text{LAI}_\text{max} = \frac{\text{LAI}^{\%}_\text{max}}{100}.
+\]</div>
+<p>Finally, the <strong>Leaf Area (LA)</strong> is computed for different densities of orchard. Although it is difficult to measure leaf area, this parameter is required for calculating water requirements. Note that small inaccuracies have little impact on the result. For practical reasons, we thus propose to assign the crop to a LAI category ranging from 0.5 (young orchard) to &gt;2.5 (adult orchard), as shown in the following table.</p>
+<!-- generated from https://www.tablesgenerator.com/html_tables -->
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-yla0{font-weight:bold;text-align:left;vertical-align:middle}
+.tg .tg-j6zm{font-weight:bold;text-align:left;vertical-align:bottom}
+.tg .tg-7zrl{text-align:left;vertical-align:bottom}
+</style>
+<table class="tg"><thead>
+  <tr>
+    <th class="tg-yla0" rowspan="2">   <br><span style="color:black">Planting density</span>  <br>(tree/ha) </th>
+    <th class="tg-j6zm" colspan="5">&nbsp;&nbsp;&nbsp;<br><span style="color:black">LAI category according to tree age</span>&nbsp;&nbsp;&nbsp;</th>
+  </tr>
+  <tr>
+    <th class="tg-j6zm">&nbsp;&nbsp;&nbsp;<br><span style="color:black">0.5</span>&nbsp;&nbsp;&nbsp;</th>
+    <th class="tg-j6zm">&nbsp;&nbsp;&nbsp;<br><span style="color:black">1</span>&nbsp;&nbsp;&nbsp;</th>
+    <th class="tg-j6zm">&nbsp;&nbsp;&nbsp;<br><span style="color:black">1.5</span>&nbsp;&nbsp;&nbsp;</th>
+    <th class="tg-j6zm">&nbsp;&nbsp;&nbsp;<br><span style="color:black">2</span>&nbsp;&nbsp;&nbsp;</th>
+    <th class="tg-j6zm">&nbsp;&nbsp;&nbsp;<br><span style="color:black">2.5</span>&nbsp;&nbsp;&nbsp;</th>
+  </tr></thead>
+<tbody>
+  <tr>
+    <td class="tg-7zrl">   <br><span style="color:black">Low (&lt; 1500)</span>   </td>
+    <td class="tg-7zrl">&nbsp;&nbsp;&nbsp;<br><span style="color:black">1-3</span>&nbsp;&nbsp;&nbsp;</td>
+    <td class="tg-7zrl">&nbsp;&nbsp;&nbsp;<br><span style="color:black">3-5</span>&nbsp;&nbsp;&nbsp;</td>
+    <td class="tg-7zrl">&nbsp;&nbsp;&nbsp;<br><span style="color:black">6-7</span>&nbsp;&nbsp;&nbsp;</td>
+    <td class="tg-7zrl">&nbsp;&nbsp;&nbsp;<br><span style="color:black">8-9</span>&nbsp;&nbsp;&nbsp;</td>
+    <td class="tg-7zrl">&nbsp;&nbsp;&nbsp;<br><span style="color:black">&gt;9</span>&nbsp;&nbsp;&nbsp;</td>
+  </tr>
+  <tr>
+    <td class="tg-7zrl">&nbsp;&nbsp;&nbsp;<br><span style="color:black">Medium (2000 -&nbsp;&nbsp;&nbsp;3000)</span>&nbsp;&nbsp;&nbsp;</td>
+    <td class="tg-7zrl">&nbsp;&nbsp;&nbsp;<br><span style="color:black">1-2</span>&nbsp;&nbsp;&nbsp;</td>
+    <td class="tg-7zrl">&nbsp;&nbsp;&nbsp;<br><span style="color:black">3-4</span>&nbsp;&nbsp;&nbsp;</td>
+    <td class="tg-7zrl">&nbsp;&nbsp;&nbsp;<br><span style="color:black">4-5</span>&nbsp;&nbsp;&nbsp;</td>
+    <td class="tg-7zrl">&nbsp;&nbsp;&nbsp;<br><span style="color:black">5-6</span>&nbsp;&nbsp;&nbsp;</td>
+    <td class="tg-7zrl">&nbsp;&nbsp;&nbsp;<br><span style="color:black">&gt;7</span>&nbsp;&nbsp;&nbsp;</td>
+  </tr>
+  <tr>
+    <td class="tg-7zrl">&nbsp;&nbsp;&nbsp;<br><span style="color:black">High (&gt;3000)</span>&nbsp;&nbsp;&nbsp;</td>
+    <td class="tg-7zrl">&nbsp;&nbsp;&nbsp;<br><span style="color:black">1-2</span>&nbsp;&nbsp;&nbsp;</td>
+    <td class="tg-7zrl">&nbsp;&nbsp;&nbsp;<br><span style="color:black">3</span>&nbsp;&nbsp;&nbsp;</td>
+    <td class="tg-7zrl">&nbsp;&nbsp;&nbsp;<br><span style="color:black">4</span>&nbsp;&nbsp;&nbsp;</td>
+    <td class="tg-7zrl">&nbsp;&nbsp;&nbsp;<br><span style="color:black">5</span>&nbsp;&nbsp;&nbsp;</td>
+    <td class="tg-7zrl">&nbsp;&nbsp;&nbsp;<br><span style="color:black">&gt;5</span>&nbsp;&nbsp;&nbsp;</td>
+  </tr>
+</tbody></table>
+<p>In case of low vigour due to soil fertility, vigour induced by dwarfing rootstock or week varieties, it is recommended to move down one category. Low vigour orchards and low density plantings may stop their leaf area development at a value of 2.</p>
+<p>Then the leaf area is computed as</p>
+<div class="math notranslate nohighlight">
+\[
+\text{LA}_k =  5 \cdot k \cdot \text{LAI}_\text{max}, \quad k = 0.5,1, \ldots, 2.5,
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(k\)</span> is the index corresponding to the LAI category.</p>
+</section>
+<section id="net-radiation">
+<h3>3. Net radiation<a class="headerlink" href="#net-radiation" title="Link to this heading">#</a></h3>
+<p>Let <span class="math notranslate nohighlight">\(R_s\)</span> be the solar radition and <span class="math notranslate nohighlight">\(R_n\)</span> the net radiation. We first convert the unit from W <span class="math notranslate nohighlight">\(\cdot\)</span> m<span class="math notranslate nohighlight">\(^{-2}\)</span> to MJ m<span class="math notranslate nohighlight">\(^{-2}\)</span> day<span class="math notranslate nohighlight">\(^{-1}\)</span> (see Table 3, <a class="reference external" href="https://www.fao.org/4/x0490e/x0490e07.htm#atmospheric%20parameters">report of FAO</a> for a reference).</p>
+<div class="math notranslate nohighlight">
+\[
+R_s = \texttt{Rad}\cdot 0.0864
+\]</div>
+<p>Then, <span class="math notranslate nohighlight">\(R_n\)</span> can be approximated in Switzerland using the following equation (see <span id="id1">[]</span>)</p>
+<div class="math notranslate nohighlight">
+\[
+R_n = 0.617 \cdot R_s - 1.004
+\]</div>
+</section>
+<hr class="docutils" />
+<section id="energy-absorbed-by-the-canopy">
+<h3>4. Energy absorbed by the canopy<a class="headerlink" href="#energy-absorbed-by-the-canopy" title="Link to this heading">#</a></h3>
+<p>We use the formula provided by <span id="id2">Pereira <em>et al.</em> [<a class="reference internal" href="intro.html#id4" title="A. R. Pereira, S. R. Green, and N. A. Villa Nova. Relationships between single tree canopy and grass net radiations. Agricultural and Forest Meteorology, 142(1):45–49, 2007. doi:https://doi.org/10.1016/j.agrformet.2006.11.003.">PGVN07a</a>]</span> to deduce the total amount of net (all-wave) radiation absorbed by the leaf canopy, depending on the category <span class="math notranslate nohighlight">\(k\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+A_k = 0.303 \cdot \text{LA}_k \cdot R_n
+\]</div>
+</section>
+<hr class="docutils" />
+<section id="sap-flow-by-tree-actual-transpiration">
+<h3>5. Sap flow by tree (actual transpiration)<a class="headerlink" href="#sap-flow-by-tree-actual-transpiration" title="Link to this heading">#</a></h3>
+<p>We can now use the Priestley-Taylor formula to estimate daily sap flow of a tree.</p>
+<div class="math notranslate nohighlight">
+\[
+\text{ET}_{\text{PT}}(k) = \alpha \cdot \left( \frac{s}{s + \gamma} \cdot \frac{1}{\lambda} \right) \cdot A_k
+\]</div>
+<p>with:</p>
+<p><span class="math notranslate nohighlight">\(\alpha\)</span>, <span class="math notranslate nohighlight">\(\gamma\)</span>, and <span class="math notranslate nohighlight">\(\lambda\)</span> given above.</p>
+<p>Note that this is the sap flow per tree and not per m<span class="math notranslate nohighlight">\(^{-2}\)</span>. If one wants to give <span class="math notranslate nohighlight">\(\text{ET}_{\text{PT}}\)</span> in m<span class="math notranslate nohighlight">\(^{2}\)</span>, it has to be divided by a factor 5 (for a standard orchard of 2000 trees/ha and thus 5m<span class="math notranslate nohighlight">\(^2\)</span>/tree).</p>
+<!--
+We then compute the [reference crop evapotranspiration](https://www.fao.org/4/x0490e/x0490e06.htm#TopOfPage)
+as
+
+$$
+\text{ET}_o = \frac{\text{ET}_{\text{PT}}}{5  \texttt{ET}}
+$$
+
+with the convention that $\text{ET}_o = 0 $ if $\texttt{ET} = 0$ (to avoid division by 0).
+-->
+</section>
+<section id="soil-evaporation">
+<h3>6. Soil evaporation<a class="headerlink" href="#soil-evaporation" title="Link to this heading">#</a></h3>
+<p>Now, starting from the measured value <span class="math notranslate nohighlight">\(\texttt{ET}\)</span>, we estimate the evaporation from the ground.
+It can be estimated as a part of ET<span class="math notranslate nohighlight">\(_o\)</span> that evolves during the growing season in function of the development of the canopy cover i.e. its growing shading effect until LAI max is reached. It is lower for young trees compared with adult trees. We have estimated third-order polynomial curves for each of the LAI category. The polynomials are provided in the code and you can find below a Figure with the curves together with the corresponding points they approximate.</p>
+<img alt="_images/curves_f_DOY.png" class="align-center" src="_images/curves_f_DOY.png" />
+<p>The evaporation is then estimated as</p>
+<div class="math notranslate nohighlight">
+\[
+\text{Evap}_k = f_k(\texttt{DOY}) \cdot \texttt{ET}, \text{ for }k = 0.5, 1, \ldots,2.5 ,
+\]</div>
+<p>where we have dropped (for clarity) the dependence on the Julian day \texttt{DOY}.</p>
+<p>On the other hand, we define WHAT???, as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+T_k^\text{mat} =
+\begin{cases}
+\frac{1}{5} \text{ET}_{\text{PT}} \cdot \text{LAI}_\text{max},&amp; \text{if } \texttt{ET} &gt; 0 \\
+0 &amp; \text{else.}
+\end{cases}
+\end{split}\]</div>
+<!-- We can now define the variable $K$ as:
+
+$$
+K = \begin{cases}
+\frac{T_\text{mat}_k + \text{Evap}_k(DOY)}{ET}& \text{if }ET > 0\\
+0 & \text{else.}
+\end{cases}
+$$
+-->
+</section>
+<section id="useful-rainfall">
+<h3>7. Useful rainfall<a class="headerlink" href="#useful-rainfall" title="Link to this heading">#</a></h3>
+<p>The useful rainfall is the amount of precipitation that is actually added and stored in the soil. During drier periods, less than 5mm of daily rainfall would not be considered effective, as this amount of precipitation would likely evaporate from the surface before soaking into the ground.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+R = 
+\begin{cases}
+\texttt{Rain} &amp; \text{if } \texttt{Rain}^t + \texttt{Rain}^{t-1} &gt; 5 \\
+0 &amp; \text{otherwise}
+\end{cases}
+\end{split}\]</div>
+</section>
+<section id="raw-water-balance">
+<h3>8. Raw water balance<a class="headerlink" href="#raw-water-balance" title="Link to this heading">#</a></h3>
+<p>The water balance is the amount of water present in the soil that is available to the plant. The plant will be stressed and irrigation will only be necessary when this reserve is depleted.
+Let us define <span class="math notranslate nohighlight">\(B_k\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[
+B_k = (R \cdot \texttt{net_rain_effect}) - (T_k^\text{mat} + \texttt{Evap}_k)
+\]</div>
+<p>Then, we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\texttt{Balance} = 
+\begin{cases}
+0 &amp; \text{if } B_k^{t-1} + B_k^t &lt;0\\
+B_k^{t-1} + B_k^t &amp; \text{if } 0 &lt; B_k^{t-1} + B_k^t &lt;\texttt{RAW}\\
+\texttt{RAW}\text{if } B_k^{t-1} + B_k^t &gt;\texttt{RAW}.
+\end{cases}
+\end{split}\]</div>
+<p>with <span class="math notranslate nohighlight">\(B_k^{t_0} = R^{t_0} - \texttt{ET}^{t_0} ({T_k^\text{mat}}^{t_0} +  \texttt{Evap}^{t_0}_k)\)</span>. In words, this means that \texttt{Balance} is truncated to the interval <span class="math notranslate nohighlight">\([0,\texttt{RAW}]\)</span>.</p>
+</section>
+<section id="irrigation">
+<h3>9. Irrigation<a class="headerlink" href="#irrigation" title="Link to this heading">#</a></h3>
+<p>Finally, the irrigation needed is computed as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\texttt{Irrigation} = 
+\begin{cases}
+0 &amp; \text{if } \texttt{Balance} &gt; 0 \\
+T_k^\text{mat} + \text{Evap}_k &amp; \text{otherwise}
+\end{cases}
+\end{split}\]</div>
+<p>We also provide a smoothed version of the needeed irrigation using the mean of the needed irrigation in the past 4 days:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\texttt{SmoothedIrrigation} = 
+\begin{cases}
+\frac{1}{4}\sum_{i= 1}^4 \texttt{Irrigation}_{t-i} &amp; \text{if } \texttt{Balance} &gt; 3 \\
+0  &amp; \text{otherwise}
+\end{cases}
+\end{split}\]</div>
+<!--
+  Balance = (RainfallUseful * \texttt{net_rain_effect}) - (Tmat + Evap)
+  # We initialize the first value of the Balance
+  # REFERENCE/EXPLANATION
+  Balance[1,] <- RainfallUseful[1] - ET[1] * (Tmat + Evap)[1,]
+-->
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="input_parameters.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Input parameters and units</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="function_display.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="math notranslate nohighlight">\(\texttt{balance_computation}\)</span> R function</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#input-parameters">Input Parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computation-steps">Computation Steps</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#slope-of-the-saturation-vapor-pressure-curve">1. Slope of the saturation vapor pressure curve</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#leaf-area">2. Leaf area</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#net-radiation">3. Net radiation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-absorbed-by-the-canopy">4. Energy absorbed by the canopy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sap-flow-by-tree-actual-transpiration">5. Sap flow by tree (actual transpiration)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#soil-evaporation">6. Soil evaporation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#useful-rainfall">7. Useful rainfall</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#raw-water-balance">8. Raw water balance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#irrigation">9. Irrigation</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Philippe Monney and Matthieu Wilhelm
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
