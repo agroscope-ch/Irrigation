@@ -1,12 +1,10 @@
 ### Function to compute the balance
-balance_computation <- function(Rel, ET, Rad, Temp, Rain, DOY,
+balance_computation <- function(ET, Rad, Temp, Rain, DOY,
                                 start_flowering = 109,  DayFolAreaMax = 171, 
-                                RAW = 32, net_rain_effect = .66, 
-                                method_leaf_dev = 1)
+                                RAW = 32, net_rain_effect = .66)
 {
   
-  # Rel is relative humidity (in %)
-  # ET is Evapotranspiration
+  # ET is the reference evapotranspiration
   # Rad is solar radiation in W/m^2
   # Temp is temperature in Celsius degrees
   # Rain is rainfall in mm
@@ -20,8 +18,7 @@ balance_computation <- function(Rel, ET, Rad, Temp, Rain, DOY,
   
   # net_rain_effect is the coefficient that impacts the rainfall due to the nets
   # RAW is the Readily Available Water.
-  # method_leaf_dev: at the moment, only one method is used 
-  
+
   ## See equation (1) and paragraph below for constants
   ## alpha =1.26 is given in the end of the section 1
   alph = 1.26 #  is the Priestley–Taylor parameter/constant.
@@ -38,10 +35,6 @@ balance_computation <- function(Rel, ET, Rad, Temp, Rain, DOY,
   
   DFlowering = DOY - start_flowering + 1  # day counts starting from flowering
   Q = (-0.000881834215*DFlowering ^2 + 0.150793650794*DFlowering)/6 * 100 # in percent
-  Q2 = (-0.001444*DFlowering^2 + 0.17*DFlowering)/5 * 100
-  Q2 = ifelse(Q2 > 100, yes = 100, no = Q2 )
-  
-  if(method_leaf_dev != 1) Q = Q2;
   LAIMaxPercent = case_when(
     DOY < start_flowering ~ DOY * 1.612903 - 175.806452, # linear interpolation through the
     # 2 points (109, 0) and (171, 100); 
@@ -54,11 +47,10 @@ balance_computation <- function(Rel, ET, Rad, Temp, Rain, DOY,
   # Computation in 5 categories corresponding to LAI categories
   LA = outer(X= LAIMax, Y = 5 *seq(from = 0.5, to =2.5, by= .5)) |> data.frame()
   names(LA) = paste("LA_", 1:5 * 0.5, sep = "")
-  # Conversion of units: REFERENCE?
+  # Conversion of units: see 
   Rs = Rad/(1000000/86400) # changing units of solar radiation
-  # Rn given in Calanca et al. 
   # Transformation of global radiation into useful radiation
-  # (valid on the Swiss Plateau)  Rn = Rs *0.617-1.004 
+  # Rn = Rs *0.617-1.004 
   Rn = Rs *0.617-1.004 
   # See Pereira et al. (2007b)
   A = .303 * LA * Rn ## Rn * LA per tree
@@ -69,10 +61,6 @@ balance_computation <- function(Rel, ET, Rad, Temp, Rain, DOY,
   names(Daily_sap_flow) = paste("Tc_", 1:5 * 0.5, sep = "")
   Daily_sap_flow_unit = Daily_sap_flow/5
   names(Daily_sap_flow_unit) <- paste("Daily_sap_flow_unit_", 1:5 * 0.5, sep = "")
-  
-  # # T_Eto is not used in the rest of the algorithm
-  # T_Eto = Daily_sap_flow/(5 * ET) 
-  # T_Eto[ET == 0,] <- 0 # treat the values where ET is 0 as 0 (to avoid division by 0)
   
   # third order polynomial function
   DOY_05_fun <- function(x)  0.000000010*x^3 - 0.000008397*x^2 + 0.000772552*x + 0.381393786 
@@ -101,8 +89,9 @@ balance_computation <- function(Rel, ET, Rad, Temp, Rain, DOY,
   RainfallUseful = ifelse(RainfallThreshold > 5, yes = Rain, no = 0)
   # We initialize the matrix Balance
   Balance = (RainfallUseful * net_rain_effect) - (Tmat + Evap)
-  # We initialize the first value of the Balance
-  Balance[1,] <- RainfallUseful[1] - ET[1] * (Tmat + Evap)[1,]
+  # We initialize the first value of the Balance, considering that we have
+  # RAW is completely available
+  Balance[1,] <- RAW - ET[1] * (Tmat + Evap)[1,]
   # we define a custom function to truncate values in a given interval
   truncation <- function(x, a = 0 , b = RAW)
   {
