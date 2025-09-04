@@ -177,7 +177,7 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="intro.html">
-                    Irrigation
+                    Irrigation model for Swiss Orchards
                 </a>
             </li>
         </ul>
@@ -406,7 +406,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="description-of-the-algorithm">
-<h1>Description of the algorithm<a class="headerlink" href="#description-of-the-algorithm" title="Link to this heading">#</a></h1>
+<span id="section-description-algo"></span><h1>Description of the algorithm<a class="headerlink" href="#description-of-the-algorithm" title="Link to this heading">#</a></h1>
 <p>This R function calculates the <strong>water balance</strong> of a plant based on meteorological variables, agronomic parameters, and empirical models.
 The <strong>balance</strong> corresponds to the difference between water inputs (rainfall, irrigation) and estimated needs (evapotranspiration, sap flow).</p>
 <hr class="docutils" />
@@ -466,7 +466,7 @@ The <strong>balance</strong> corresponds to the difference between water inputs 
 <hr class="docutils" />
 <section id="computation-steps">
 <h2>Computation Steps<a class="headerlink" href="#computation-steps" title="Link to this heading">#</a></h2>
-<p>In what follows, the variables \texttt{Rel}, \texttt{ET}, \texttt{Rad}, \texttt{Temp} and \texttt{Rain} are all <strong>daily measurements</strong>. It means that, when they are used in the following, they are implicitely depending on the day of the year. When it is useful, we use the index <span class="math notranslate nohighlight">\(t\)</span> to denote the current day, <span class="math notranslate nohighlight">\(t-1\)</span> to denote the previous one and <span class="math notranslate nohighlight">\(t_0\)</span> to denote the first day when the measurements start.</p>
+<p>In what follows, the variables <span class="math notranslate nohighlight">\(\texttt{Rel}, \texttt{ET}, \texttt{Rad}, \texttt{Temp}\)</span> and <span class="math notranslate nohighlight">\(\texttt{Rain}\)</span> are all <strong>daily measurements</strong>. It means that, when they are used in the following, they are implicitely depending on the day of the year. When it is useful, we use the index <span class="math notranslate nohighlight">\(t\)</span> to denote the current day, <span class="math notranslate nohighlight">\(t-1\)</span> to denote the previous one and <span class="math notranslate nohighlight">\(t_0\)</span> to denote the first day when the measurements start.</p>
 <p>We will use the Priestley–Taylor formula, that reads as follows:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -477,7 +477,7 @@ T_c = \alpha \cdot \left( \frac{s}{s + \gamma} \cdot \frac{1}{\lambda} \right) \
 <li><p><span class="math notranslate nohighlight">\(\alpha = 1.26\)</span>: Priestley–Taylor parameter</p></li>
 <li><p><span class="math notranslate nohighlight">\(\gamma = 0.066 \, \text{kPa}/^\circ \text{C}\)</span>: Psychrometric coefficient</p></li>
 <li><p><span class="math notranslate nohighlight">\(\lambda = 2.45 \, \text{MJ}/\text{kg}\)</span>: Latent heat of vaporization</p></li>
-<li><p><span class="math notranslate nohighlight">\(s = s(\texttt{Temp})\)</span> is the slope of the saturation vapor pressure curve in terms of the average daily temperature \texttt{Temp}.</p></li>
+<li><p><span class="math notranslate nohighlight">\(s = s(\texttt{Temp})\)</span> is the slope of the saturation vapor pressure curve in terms of the average daily temperature <span class="math notranslate nohighlight">\(\texttt{Temp}\)</span>.</p></li>
 <li><p><span class="math notranslate nohighlight">\(A [\text{MJ}\cdot \text{tree}^{-1} \cdot \text{day}^{-1}]\)</span> is the total amount of net  (all-wave) radiation absorbed by the leaf canopy;</p></li>
 </ul>
 <p>The first is to compute the slope of the saturation vapor pressure. The steps 2 to 5 will be dedicated to the determination of <span class="math notranslate nohighlight">\(A\)</span>.</p>
@@ -515,9 +515,10 @@ Q, &amp; \text{if } \texttt{start_flowering} \leq \texttt{DOY} &lt; \texttt{DayF
 <ul class="simple">
 <li><p>Linear before <span class="math notranslate nohighlight">\(\texttt{start}_\texttt{flowering}\)</span></p></li>
 <li><p>Polynomial between <span class="math notranslate nohighlight">\(\texttt{start}_\texttt{flowering}\)</span> and \texttt{DayFolAreaMax}</p></li>
-<li><p>Constant at 100% between \texttt{DayFolAreaMax} and \texttt{DOY} = 252</p></li>
+<li><p>Constant at 100% between <span class="math notranslate nohighlight">\(\texttt{DayFolAreaMax}\)</span> and <span class="math notranslate nohighlight">\(\texttt{DOY} = 252\)</span>.</p></li>
 <li><p>Then linearly decreasing</p></li>
 </ul>
+<p>The polynomial is mimicking the Figure 1A of <span id="id1">[<a class="reference internal" href="Bibliography.html#id4" title="L. Cheng and R. Raba. Accumulation of macro- and micronutrients and nitrogen demand-supply relationship of ‘gala’/‘malling 26’ apple trees grown in sand culture. Journal of the American Society for Horticultural Science, 134(1):3–-13, 2009. doi:https://doi.org/10.21273/JASHS.134.1.3.">CR09</a>]</span>, describing the seasonal patterns of total leaf area per tree and considering 62 days from full bloom to maximal extend.</p>
 <p>We then transform it back to a proportion (and not a percentage)</p>
 <div class="math notranslate nohighlight">
 \[
@@ -588,7 +589,7 @@ Q, &amp; \text{if } \texttt{start_flowering} \leq \texttt{DOY} &lt; \texttt{DayF
 \[
 R_s = \texttt{Rad}\cdot 0.0864
 \]</div>
-<p>Then, <span class="math notranslate nohighlight">\(R_n\)</span> can be approximated in Switzerland using the following equation (see <span id="id1">[]</span>)</p>
+<p>Then, <span class="math notranslate nohighlight">\(R_n\)</span> can be approximated in Switzerland using the following equation (see <span id="id2">[<a class="reference internal" href="Bibliography.html#id5" title="J. A. Davies. A note on the relationship between net radiation and solar radiation. Quarterly Journal of the Royal Meteorological Society, 93(395):109–115, 1967. doi:https://doi.org/10.1002/qj.49709339511.">Dav67</a>]</span>)</p>
 <div class="math notranslate nohighlight">
 \[
 R_n = 0.617 \cdot R_s - 1.004
@@ -597,7 +598,7 @@ R_n = 0.617 \cdot R_s - 1.004
 <hr class="docutils" />
 <section id="energy-absorbed-by-the-canopy">
 <h3>4. Energy absorbed by the canopy<a class="headerlink" href="#energy-absorbed-by-the-canopy" title="Link to this heading">#</a></h3>
-<p>We use the formula provided by <span id="id2">Pereira <em>et al.</em> [<a class="reference internal" href="intro.html#id4" title="A. R. Pereira, S. R. Green, and N. A. Villa Nova. Relationships between single tree canopy and grass net radiations. Agricultural and Forest Meteorology, 142(1):45–49, 2007. doi:https://doi.org/10.1016/j.agrformet.2006.11.003.">PGVN07a</a>]</span> to deduce the total amount of net (all-wave) radiation absorbed by the leaf canopy, depending on the category <span class="math notranslate nohighlight">\(k\)</span>.</p>
+<p>We use the formula provided by <span id="id3">Pereira <em>et al.</em> [<a class="reference internal" href="Bibliography.html#id3" title="A. R. Pereira, S. R. Green, and N. A. Villa Nova. Relationships between single tree canopy and grass net radiations. Agricultural and Forest Meteorology, 142(1):45–49, 2007. doi:https://doi.org/10.1016/j.agrformet.2006.11.003.">PGVN07a</a>]</span> to deduce the total amount of net (all-wave) radiation absorbed by the leaf canopy, depending on the category <span class="math notranslate nohighlight">\(k\)</span>.</p>
 <div class="math notranslate nohighlight">
 \[
 A_k = 0.303 \cdot \text{LA}_k \cdot R_n
@@ -614,16 +615,6 @@ A_k = 0.303 \cdot \text{LA}_k \cdot R_n
 <p>with:</p>
 <p><span class="math notranslate nohighlight">\(\alpha\)</span>, <span class="math notranslate nohighlight">\(\gamma\)</span>, and <span class="math notranslate nohighlight">\(\lambda\)</span> given above.</p>
 <p>Note that this is the sap flow per tree and not per m<span class="math notranslate nohighlight">\(^{-2}\)</span>. If one wants to give <span class="math notranslate nohighlight">\(\text{ET}_{\text{PT}}\)</span> in m<span class="math notranslate nohighlight">\(^{2}\)</span>, it has to be divided by a factor 5 (for a standard orchard of 2000 trees/ha and thus 5m<span class="math notranslate nohighlight">\(^2\)</span>/tree).</p>
-<!--
-We then compute the [reference crop evapotranspiration](https://www.fao.org/4/x0490e/x0490e06.htm#TopOfPage)
-as
-
-$$
-\text{ET}_o = \frac{\text{ET}_{\text{PT}}}{5  \texttt{ET}}
-$$
-
-with the convention that $\text{ET}_o = 0 $ if $\texttt{ET} = 0$ (to avoid division by 0).
--->
 </section>
 <section id="soil-evaporation">
 <h3>6. Soil evaporation<a class="headerlink" href="#soil-evaporation" title="Link to this heading">#</a></h3>
@@ -636,7 +627,7 @@ It can be estimated as a part of ET<span class="math notranslate nohighlight">\(
 \text{Evap}_k = f_k(\texttt{DOY}) \cdot \texttt{ET}, \text{ for }k = 0.5, 1, \ldots,2.5 ,
 \]</div>
 <p>where we have dropped (for clarity) the dependence on the Julian day \texttt{DOY}.</p>
-<p>On the other hand, we define WHAT???, as</p>
+<p>On the other hand, we define <span class="math notranslate nohighlight">\(T_k^\text{mat}\)</span> as</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 T_k^\text{mat} =
@@ -645,15 +636,6 @@ T_k^\text{mat} =
 0 &amp; \text{else.}
 \end{cases}
 \end{split}\]</div>
-<!-- We can now define the variable $K$ as:
-
-$$
-K = \begin{cases}
-\frac{T_\text{mat}_k + \text{Evap}_k(DOY)}{ET}& \text{if }ET > 0\\
-0 & \text{else.}
-\end{cases}
-$$
--->
 </section>
 <section id="useful-rainfall">
 <h3>7. Useful rainfall<a class="headerlink" href="#useful-rainfall" title="Link to this heading">#</a></h3>
@@ -682,7 +664,7 @@ B_k = (R \cdot \texttt{net_rain_effect}) - (T_k^\text{mat} + \texttt{Evap}_k)
 \begin{cases}
 0 &amp; \text{if } B_k^{t-1} + B_k^t &lt;0\\
 B_k^{t-1} + B_k^t &amp; \text{if } 0 &lt; B_k^{t-1} + B_k^t &lt;\texttt{RAW}\\
-\texttt{RAW}\text{if } B_k^{t-1} + B_k^t &gt;\texttt{RAW}.
+\texttt{RAW} &amp; \text{if } B_k^{t-1} + B_k^t &gt;\texttt{RAW}.
 \end{cases}
 \end{split}\]</div>
 <p>with <span class="math notranslate nohighlight">\(B_k^{t_0} = R^{t_0} - \texttt{ET}^{t_0} ({T_k^\text{mat}}^{t_0} +  \texttt{Evap}^{t_0}_k)\)</span>. In words, this means that \texttt{Balance} is truncated to the interval <span class="math notranslate nohighlight">\([0,\texttt{RAW}]\)</span>.</p>

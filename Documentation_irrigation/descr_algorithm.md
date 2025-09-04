@@ -1,3 +1,5 @@
+(section:description_algo)=
+
 # Description of the algorithm
 
 This R function calculates the **water balance** of a plant based on meteorological variables, agronomic parameters, and empirical models.
@@ -34,7 +36,7 @@ For more details about the input parameters, see the [previous section](section:
 
 ## Computation Steps
 
-In what follows, the variables \texttt{Rel}, \texttt{ET}, \texttt{Rad}, \texttt{Temp} and \texttt{Rain} are all **daily measurements**. It means that, when they are used in the following, they are implicitely depending on the day of the year. When it is useful, we use the index $t$ to denote the current day, $t-1$ to denote the previous one and $t_0$ to denote the first day when the measurements start. 
+In what follows, the variables $\texttt{Rel}, \texttt{ET}, \texttt{Rad}, \texttt{Temp}$ and $\texttt{Rain}$ are all **daily measurements**. It means that, when they are used in the following, they are implicitely depending on the day of the year. When it is useful, we use the index $t$ to denote the current day, $t-1$ to denote the previous one and $t_0$ to denote the first day when the measurements start. 
 
 We will use the Priestley–Taylor formula, that reads as follows:
 
@@ -47,7 +49,7 @@ where:
 - $\alpha = 1.26$: Priestley–Taylor parameter  
 - $\gamma = 0.066 \, \text{kPa}/^\circ \text{C}$: Psychrometric coefficient  
 - $\lambda = 2.45 \, \text{MJ}/\text{kg}$: Latent heat of vaporization
-- $s = s(\texttt{Temp})$ is the slope of the saturation vapor pressure curve in terms of the average daily temperature \texttt{Temp}.
+- $s = s(\texttt{Temp})$ is the slope of the saturation vapor pressure curve in terms of the average daily temperature $\texttt{Temp}$.
 - $A [\text{MJ}\cdot \text{tree}^{-1} \cdot \text{day}^{-1}]$ is the total amount of net  (all-wave) radiation absorbed by the leaf canopy;
 
 The first is to compute the slope of the saturation vapor pressure. The steps 2 to 5 will be dedicated to the determination of $A$. 
@@ -91,8 +93,11 @@ Interpolation logic:
 
 - Linear before $\texttt{start}_\texttt{flowering}$
 - Polynomial between $\texttt{start}_\texttt{flowering}$ and \texttt{DayFolAreaMax}
-- Constant at 100% between \texttt{DayFolAreaMax} and \texttt{DOY} = 252
+- Constant at 100% between $\texttt{DayFolAreaMax}$ and $\texttt{DOY} = 252$.
 - Then linearly decreasing
+
+The polynomial is mimicking the Figure 1A of {cite:p}`Cheng2009`, describing the seasonal patterns of total leaf area per tree and considering 62 days from full bloom to maximal extend.
+
 
 We then transform it back to a proportion (and not a percentage)
 
@@ -172,7 +177,7 @@ $$
 R_s = \texttt{Rad}\cdot 0.0864
 $$
 
-Then, $R_n$ can be approximated in Switzerland using the following equation (see {cite:p}`Calanca`)
+Then, $R_n$ can be approximated in Switzerland using the following equation (see {cite:p}`Davies1967`)
 
 $$
 R_n = 0.617 \cdot R_s - 1.004
@@ -204,16 +209,6 @@ with:
 
 Note that this is the sap flow per tree and not per m$^{-2}$. If one wants to give $\text{ET}_{\text{PT}}$ in m$^{2}$, it has to be divided by a factor 5 (for a standard orchard of 2000 trees/ha and thus 5m$^2$/tree).
 
-<!--
-We then compute the [reference crop evapotranspiration](https://www.fao.org/4/x0490e/x0490e06.htm#TopOfPage)
-as
-
-$$
-\text{ET}_o = \frac{\text{ET}_{\text{PT}}}{5  \texttt{ET}}
-$$
-
-with the convention that $\text{ET}_o = 0 $ if $\texttt{ET} = 0$ (to avoid division by 0).
--->
 
 ### 6. Soil evaporation
 
@@ -231,7 +226,7 @@ $$
 $$
 where we have dropped (for clarity) the dependence on the Julian day \texttt{DOY}.
 
-On the other hand, we define WHAT???, as 
+On the other hand, we define $T_k^\text{mat}$ as 
 
 $$
 T_k^\text{mat} =
@@ -241,15 +236,6 @@ T_k^\text{mat} =
 \end{cases}
 $$
 
-<!-- We can now define the variable $K$ as:
-
-$$
-K = \begin{cases}
-\frac{T_\text{mat}_k + \text{Evap}_k(DOY)}{ET}& \text{if }ET > 0\\
-0 & \text{else.}
-\end{cases}
-$$
--->
 ### 7. Useful rainfall
 
 The useful rainfall is the amount of precipitation that is actually added and stored in the soil. During drier periods, less than 5mm of daily rainfall would not be considered effective, as this amount of precipitation would likely evaporate from the surface before soaking into the ground.
@@ -279,7 +265,7 @@ $$
 \begin{cases}
 0 & \text{if } B_k^{t-1} + B_k^t <0\\
 B_k^{t-1} + B_k^t & \text{if } 0 < B_k^{t-1} + B_k^t <\texttt{RAW}\\
-\texttt{RAW}\text{if } B_k^{t-1} + B_k^t >\texttt{RAW}.
+\texttt{RAW} & \text{if } B_k^{t-1} + B_k^t >\texttt{RAW}.
 \end{cases}
 $$
 

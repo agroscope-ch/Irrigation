@@ -1,13 +1,15 @@
 (section:input_parameters)=
+
 # Input parameters and units
 
 The model is based on the following input parameters. 
 
-- **`Rel` is the mean relative humidity per day(in %)**
+<!-- - **`Rel` is the mean relative humidity per day(in %)**
 [Relative humidity](https://www.meteoswiss.admin.ch/weather/weather-and-climate-from-a-to-z/humidity.html)
 indicates the amount of water vapour contained in the air, expressed as
 a percentage. Relative humidity varies with air temperature: the warmer
 the air, the more water vapour it can contain.
+-->
 - **`ET` is the daily Evapotranspiration in mm**
 Reference evapotranspiration (in mm), denoted as `ET` is the estimation
 of the [evapotranspiration](https://www.fao.org/4/x0490e/x0490e04.htm#evapotranspiration%20(et))
