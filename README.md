@@ -5,14 +5,11 @@ This is a model to compute the needs of irrigation in an orchard in Switzerland.
 - [Antonio R. Pereira, Steve R. Green and Nilson A. Villa Nova, _Sap flow, leaf area, net radiation and the Priestley–Taylor formula for irrigated orchards and isolated trees_,
 **Agricultural Water Management**, 2007](https://doi.org/10.1016/j.agwat.2007.01.012)
 
-### Aknowledgement \& funding
-
-OFAG fund?
 
 ### Files and scripts
 
-- The script `modelIrig.R` reproduces exactly the results obtained by Philippe Monney in his Excel sheets. 
-- The script `Model_irrigation_fun.R` is orginally based on the script `modelIrig.R` but differs in .
+- The script `Model_irrigation_fun.R` is orginally based on the Excel sheets of P. Monney and have been tested.
+- The whole documentation is available online [here](https://agroscope-ch.github.io/Irrigation/intro.html)
 
 ### Licencing
 
