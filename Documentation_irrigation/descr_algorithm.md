@@ -177,11 +177,26 @@ $$
 R_s = \texttt{Rad}\cdot 0.0864
 $$
 
-Then, $R_n$ can be approximated in Switzerland using the following equation (see {cite:p}`Davies1967`)
+Then, $R_n$ can be approximated in Switzerland using the following equation (see {cite:p}`Davies1967`, equation (6))
 
 $$
 R_n = 0.617 \cdot R_s - 1.004
 $$
+
+More precisely, the equation given by {cite:t}`Davies1967` is provided in \emph{gramcalories}, abreviated $\text{gr cal}$ by $\text{cm}^-2$ and by day and is 
+
+$$
+R_n = 0.617 \cdot R_s - 24 \quad \text{gr cal} \cdot \text{cm}^{-2} \cdot \text{day}^{-1}.
+$$
+
+Note that [\emph{gramcalories}](https://en.wikipedia.org/wiki/Calorie) is usually referred today to as \emph{calorie} and is equal to 4.184 J. Finally, we have
+
+$$
+1\ \text{gr cal} \times \text{cm}^{-2} = 4.184 [\text{J} /\text{gr cal} ]  \times 10^4 [\text{cm}^2/\text{m}^2] \times 10^-6 [\text{MJ} / \text{J}] = 0.04184 \ \text{MJ} \times \text{m}^{−2},
+$$
+and hence $24 \cdot 0.04184 = 1.004$ gives the correct intercept in the equation above.  
+
+
 
 ---
 
@@ -269,7 +284,7 @@ B_k^{t-1} + B_k^t & \text{if } 0 < B_k^{t-1} + B_k^t <\texttt{RAW}\\
 \end{cases}
 $$
 
-with $B_k^{t_0} = R^{t_0} - \texttt{ET}^{t_0} ({T_k^\text{mat}}^{t_0} +  \texttt{Evap}^{t_0}_k)$. In words, this means that \texttt{Balance} is truncated to the interval $[0,\texttt{RAW}]$.
+with $B_k^{t_0} = R^{t_0} - \texttt{ET}^{t_0} ({T_k^\text{mat}}^{t_0} +  \texttt{Evap}^{t_0}_k)$. In words, this means that $\texttt{Balance}$ is truncated to the interval $[0,\texttt{RAW}]$.
 
 ### 9. Irrigation
 

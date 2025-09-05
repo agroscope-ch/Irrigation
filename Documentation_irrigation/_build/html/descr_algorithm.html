@@ -62,7 +62,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'descr_algorithm';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="\(\texttt{balance_computation}\) R function" href="function_display.html" />
+    <link rel="next" title="balance_computation R function" href="function_display.html" />
     <link rel="prev" title="Input parameters and units" href="input_parameters.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -184,7 +184,8 @@
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="input_parameters.html">Input parameters and units</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Description of the algorithm</a></li>
-<li class="toctree-l1"><a class="reference internal" href="function_display.html"><span class="math notranslate nohighlight">\(\texttt{balance_computation}\)</span> R function</a></li>
+<li class="toctree-l1"><a class="reference internal" href="function_display.html"><code class="docutils literal notranslate"><span class="pre">balance_computation</span></code> R function</a></li>
+<li class="toctree-l1"><a class="reference internal" href="output_test.html">Output of the model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
 </ul>
 
@@ -240,7 +241,7 @@
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+      <li><a href="https://github.com/agroscope-ch/Irrigation" target="_blank"
    class="btn btn-sm btn-source-repository-button dropdown-item"
    title="Source repository"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -257,7 +258,24 @@
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fdescr_algorithm.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/agroscope-ch/Irrigation/edit/main/Documentation_irrigation/descr_algorithm.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/agroscope-ch/Irrigation/issues/new?title=Issue%20on%20page%20%2Fdescr_algorithm.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -589,16 +607,27 @@ Q, &amp; \text{if } \texttt{start_flowering} \leq \texttt{DOY} &lt; \texttt{DayF
 \[
 R_s = \texttt{Rad}\cdot 0.0864
 \]</div>
-<p>Then, <span class="math notranslate nohighlight">\(R_n\)</span> can be approximated in Switzerland using the following equation (see <span id="id2">[<a class="reference internal" href="Bibliography.html#id5" title="J. A. Davies. A note on the relationship between net radiation and solar radiation. Quarterly Journal of the Royal Meteorological Society, 93(395):109–115, 1967. doi:https://doi.org/10.1002/qj.49709339511.">Dav67</a>]</span>)</p>
+<p>Then, <span class="math notranslate nohighlight">\(R_n\)</span> can be approximated in Switzerland using the following equation (see <span id="id2">[<a class="reference internal" href="Bibliography.html#id5" title="J. A. Davies. A note on the relationship between net radiation and solar radiation. Quarterly Journal of the Royal Meteorological Society, 93(395):109–115, 1967. doi:https://doi.org/10.1002/qj.49709339511.">Dav67</a>]</span>, equation (6))</p>
 <div class="math notranslate nohighlight">
 \[
 R_n = 0.617 \cdot R_s - 1.004
 \]</div>
+<p>More precisely, the equation given by <span id="id3">Davies [<a class="reference internal" href="Bibliography.html#id5" title="J. A. Davies. A note on the relationship between net radiation and solar radiation. Quarterly Journal of the Royal Meteorological Society, 93(395):109–115, 1967. doi:https://doi.org/10.1002/qj.49709339511.">Dav67</a>]</span> is provided in \emph{gramcalories}, abreviated <span class="math notranslate nohighlight">\(\text{gr cal}\)</span> by <span class="math notranslate nohighlight">\(\text{cm}^-2\)</span> and by day and is</p>
+<div class="math notranslate nohighlight">
+\[
+R_n = 0.617 \cdot R_s - 24 \quad \text{gr cal} \cdot \text{cm}^{-2} \cdot \text{day}^{-1}.
+\]</div>
+<p>Note that <a class="reference external" href="https://en.wikipedia.org/wiki/Calorie">\emph{gramcalories}</a> is usually referred today to as \emph{calorie} and is equal to 4.184 J. Finally, we have</p>
+<div class="math notranslate nohighlight">
+\[
+1\ \text{gr cal} \times \text{cm}^{-2} = 4.184 [\text{J} /\text{gr cal} ]  \times 10^4 [\text{cm}^2/\text{m}^2] \times 10^-6 [\text{MJ} / \text{J}] = 0.04184 \ \text{MJ} \times \text{m}^{−2},
+\]</div>
+<p>and hence <span class="math notranslate nohighlight">\(24 \cdot 0.04184 = 1.004\)</span> gives the correct intercept in the equation above.</p>
 </section>
 <hr class="docutils" />
 <section id="energy-absorbed-by-the-canopy">
 <h3>4. Energy absorbed by the canopy<a class="headerlink" href="#energy-absorbed-by-the-canopy" title="Link to this heading">#</a></h3>
-<p>We use the formula provided by <span id="id3">Pereira <em>et al.</em> [<a class="reference internal" href="Bibliography.html#id3" title="A. R. Pereira, S. R. Green, and N. A. Villa Nova. Relationships between single tree canopy and grass net radiations. Agricultural and Forest Meteorology, 142(1):45–49, 2007. doi:https://doi.org/10.1016/j.agrformet.2006.11.003.">PGVN07a</a>]</span> to deduce the total amount of net (all-wave) radiation absorbed by the leaf canopy, depending on the category <span class="math notranslate nohighlight">\(k\)</span>.</p>
+<p>We use the formula provided by <span id="id4">Pereira <em>et al.</em> [<a class="reference internal" href="Bibliography.html#id3" title="A. R. Pereira, S. R. Green, and N. A. Villa Nova. Relationships between single tree canopy and grass net radiations. Agricultural and Forest Meteorology, 142(1):45–49, 2007. doi:https://doi.org/10.1016/j.agrformet.2006.11.003.">PGVN07a</a>]</span> to deduce the total amount of net (all-wave) radiation absorbed by the leaf canopy, depending on the category <span class="math notranslate nohighlight">\(k\)</span>.</p>
 <div class="math notranslate nohighlight">
 \[
 A_k = 0.303 \cdot \text{LA}_k \cdot R_n
@@ -667,7 +696,7 @@ B_k^{t-1} + B_k^t &amp; \text{if } 0 &lt; B_k^{t-1} + B_k^t &lt;\texttt{RAW}\\
 \texttt{RAW} &amp; \text{if } B_k^{t-1} + B_k^t &gt;\texttt{RAW}.
 \end{cases}
 \end{split}\]</div>
-<p>with <span class="math notranslate nohighlight">\(B_k^{t_0} = R^{t_0} - \texttt{ET}^{t_0} ({T_k^\text{mat}}^{t_0} +  \texttt{Evap}^{t_0}_k)\)</span>. In words, this means that \texttt{Balance} is truncated to the interval <span class="math notranslate nohighlight">\([0,\texttt{RAW}]\)</span>.</p>
+<p>with <span class="math notranslate nohighlight">\(B_k^{t_0} = R^{t_0} - \texttt{ET}^{t_0} ({T_k^\text{mat}}^{t_0} +  \texttt{Evap}^{t_0}_k)\)</span>. In words, this means that <span class="math notranslate nohighlight">\(\texttt{Balance}\)</span> is truncated to the interval <span class="math notranslate nohighlight">\([0,\texttt{RAW}]\)</span>.</p>
 </section>
 <section id="irrigation">
 <h3>9. Irrigation<a class="headerlink" href="#irrigation" title="Link to this heading">#</a></h3>
@@ -743,7 +772,7 @@ T_k^\text{mat} + \text{Evap}_k &amp; \text{otherwise}
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="math notranslate nohighlight">\(\texttt{balance_computation}\)</span> R function</p>
+        <p class="prev-next-title"><code class="docutils literal notranslate"><span class="pre">balance_computation</span></code> R function</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

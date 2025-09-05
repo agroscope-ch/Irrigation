@@ -8,4 +8,5 @@ chapters:
 - file: descr_algorithm
 #- file: documentation
 - file: function_display
+- file: output_test
 - file: Bibliography

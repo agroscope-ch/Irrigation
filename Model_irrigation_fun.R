@@ -3,7 +3,7 @@ balance_computation <- function(ET, Rad, Temp, Rain, DOY,
                                 start_flowering = 109,  DayFolAreaMax = 171, 
                                 RAW = 32, net_rain_effect = .66)
 {
-  
+  require(dplyr)
   # ET is the reference evapotranspiration
   # Rad is solar radiation in W/m^2
   # Temp is temperature in Celsius degrees
@@ -35,7 +35,7 @@ balance_computation <- function(ET, Rad, Temp, Rain, DOY,
   
   DFlowering = DOY - start_flowering + 1  # day counts starting from flowering
   Q = (-0.000881834215*DFlowering ^2 + 0.150793650794*DFlowering)/6 * 100 # in percent
-  LAIMaxPercent = case_when(
+  LAIMaxPercent = dplyr::case_when(
     DOY < start_flowering ~ DOY * 1.612903 - 175.806452, # linear interpolation through the
     # 2 points (109, 0) and (171, 100); 
     DOY >= start_flowering & DOY < DayFolAreaMax ~ Q,
@@ -115,11 +115,16 @@ balance_computation <- function(ET, Rad, Temp, Rain, DOY,
                               function(z) c(rep(NA, 4), ma(z, n = 4)))
   # we truncate it to the interval
   SmoothedIrrigation[Balance >3] <- 0
-  
-  return(list(s = s, LAIMaxPercent = LAIMaxPercent, Rn = Rn, 
-              Daily_sap_flow = Daily_sap_flow, Evap = Evap, Tmat = Tmat,
-              # ETc_ETo = ETc_ETo, # not computed anymore
-              RainfallUseful = RainfallUseful,
-              Balance = Balance, Irrigation = Irrigation,
-              SmoothedIrrigation = SmoothedIrrigation))
+  l <- list(s = s, LAIMaxPercent = LAIMaxPercent, Rn = Rn, 
+            Daily_sap_flow = Daily_sap_flow, Evap = Evap, Tmat = Tmat,
+            RainfallUseful = RainfallUseful,
+            Balance = Balance, Irrigation = Irrigation,
+            SmoothedIrrigation = SmoothedIrrigation)
+  class(l) = "Irrigation"
+  return(l)
+}
+
+print.Irrigation <- function(x, ...){
+  x = x[c("Irrigation")]
+  NextMethod()
 }

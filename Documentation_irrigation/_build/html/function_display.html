@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>\(\texttt{balance_computation}\) R function &#8212; Irrigation</title>
+    <title>balance_computation R function &#8212; Irrigation</title>
   
   
   
@@ -57,12 +57,10 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'function_display';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Bibliography" href="Bibliography.html" />
+    <link rel="next" title="Output of the model" href="output_test.html" />
     <link rel="prev" title="Description of the algorithm" href="descr_algorithm.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -184,7 +182,8 @@
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="input_parameters.html">Input parameters and units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="descr_algorithm.html">Description of the algorithm</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#"><span class="math notranslate nohighlight">\(\texttt{balance_computation}\)</span> R function</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">balance_computation</span></code> R function</a></li>
+<li class="toctree-l1"><a class="reference internal" href="output_test.html">Output of the model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bibliography.html">Bibliography</a></li>
 </ul>
 
@@ -240,7 +239,7 @@
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+      <li><a href="https://github.com/agroscope-ch/Irrigation" target="_blank"
    class="btn btn-sm btn-source-repository-button dropdown-item"
    title="Source repository"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -257,7 +256,24 @@
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Ffunction_display.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/agroscope-ch/Irrigation/edit/main/Documentation_irrigation/function_display.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/agroscope-ch/Irrigation/issues/new?title=Issue%20on%20page%20%2Ffunction_display.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -369,7 +385,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>\texttt{balance_computation} R function</h1>
+    <h1>balance_computation R function</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -383,15 +399,15 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="texttt-balance-computation-r-function">
-<h1><span class="math notranslate nohighlight">\(\texttt{balance_computation}\)</span> R function<a class="headerlink" href="#texttt-balance-computation-r-function" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="balance-computation-r-function">
+<h1><code class="docutils literal notranslate"><span class="pre">balance_computation</span></code> R function<a class="headerlink" href="#balance-computation-r-function" title="Link to this heading">#</a></h1>
 <p>Below, you can find the R code for the function <code class="docutils literal notranslate"><span class="pre">balance_computation</span></code>. The details of the algorithm are explained in the <a class="reference internal" href="descr_algorithm.html#section-description-algo"><span class="std std-ref">previous section</span></a>.</p>
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1">### Function to compute the balance</span>
 <span class="n">balance_computation</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">ET</span><span class="p">,</span><span class="w"> </span><span class="n">Rad</span><span class="p">,</span><span class="w"> </span><span class="n">Temp</span><span class="p">,</span><span class="w"> </span><span class="n">Rain</span><span class="p">,</span><span class="w"> </span><span class="n">DOY</span><span class="p">,</span>
 <span class="w">                                </span><span class="n">start_flowering</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">109</span><span class="p">,</span><span class="w">  </span><span class="n">DayFolAreaMax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">171</span><span class="p">,</span><span class="w"> </span>
 <span class="w">                                </span><span class="n">RAW</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">32</span><span class="p">,</span><span class="w"> </span><span class="n">net_rain_effect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">.</span><span class="m">66</span><span class="p">)</span>
 <span class="p">{</span>
-<span class="w">  </span>
+<span class="w">  </span><span class="nf">require</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span>
 <span class="w">  </span><span class="c1"># ET is the reference evapotranspiration</span>
 <span class="w">  </span><span class="c1"># Rad is solar radiation in W/m^2</span>
 <span class="w">  </span><span class="c1"># Temp is temperature in Celsius degrees</span>
@@ -423,7 +439,7 @@ document.write(`
 <span class="w">  </span>
 <span class="w">  </span><span class="n">DFlowering</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DOY</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start_flowering</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="w">  </span><span class="c1"># day counts starting from flowering</span>
 <span class="w">  </span><span class="n">Q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="m">-0.000881834215</span><span class="o">*</span><span class="n">DFlowering</span><span class="w"> </span><span class="o">^</span><span class="m">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">0.150793650794</span><span class="o">*</span><span class="n">DFlowering</span><span class="p">)</span><span class="o">/</span><span class="m">6</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="c1"># in percent</span>
-<span class="w">  </span><span class="n">LAIMaxPercent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">case_when</span><span class="p">(</span>
+<span class="w">  </span><span class="n">LAIMaxPercent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dplyr</span><span class="o">::</span><span class="nf">case_when</span><span class="p">(</span>
 <span class="w">    </span><span class="n">DOY</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">start_flowering</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">DOY</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">1.612903</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">175.806452</span><span class="p">,</span><span class="w"> </span><span class="c1"># linear interpolation through the</span>
 <span class="w">    </span><span class="c1"># 2 points (109, 0) and (171, 100); </span>
 <span class="w">    </span><span class="n">DOY</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">start_flowering</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">DOY</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">DayFolAreaMax</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">Q</span><span class="p">,</span>
@@ -503,13 +519,18 @@ document.write(`
 <span class="w">                              </span><span class="kr">function</span><span class="p">(</span><span class="n">z</span><span class="p">)</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="nf">rep</span><span class="p">(</span><span class="kc">NA</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="nf">ma</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="p">)))</span>
 <span class="w">  </span><span class="c1"># we truncate it to the interval</span>
 <span class="w">  </span><span class="n">SmoothedIrrigation</span><span class="p">[</span><span class="n">Balance</span><span class="w"> </span><span class="o">&gt;</span><span class="m">3</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0</span>
-<span class="w">  </span>
-<span class="w">  </span><span class="kr">return</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">LAIMaxPercent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LAIMaxPercent</span><span class="p">,</span><span class="w"> </span><span class="n">Rn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Rn</span><span class="p">,</span><span class="w"> </span>
-<span class="w">              </span><span class="n">Daily_sap_flow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Daily_sap_flow</span><span class="p">,</span><span class="w"> </span><span class="n">Evap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Evap</span><span class="p">,</span><span class="w"> </span><span class="n">Tmat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Tmat</span><span class="p">,</span>
-<span class="w">              </span><span class="c1"># ETc_ETo = ETc_ETo, # not computed anymore</span>
-<span class="w">              </span><span class="n">RainfallUseful</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RainfallUseful</span><span class="p">,</span>
-<span class="w">              </span><span class="n">Balance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Balance</span><span class="p">,</span><span class="w"> </span><span class="n">Irrigation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Irrigation</span><span class="p">,</span>
-<span class="w">              </span><span class="n">SmoothedIrrigation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SmoothedIrrigation</span><span class="p">))</span>
+<span class="w">  </span><span class="n">l</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">LAIMaxPercent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LAIMaxPercent</span><span class="p">,</span><span class="w"> </span><span class="n">Rn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Rn</span><span class="p">,</span><span class="w"> </span>
+<span class="w">            </span><span class="n">Daily_sap_flow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Daily_sap_flow</span><span class="p">,</span><span class="w"> </span><span class="n">Evap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Evap</span><span class="p">,</span><span class="w"> </span><span class="n">Tmat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Tmat</span><span class="p">,</span>
+<span class="w">            </span><span class="n">RainfallUseful</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RainfallUseful</span><span class="p">,</span>
+<span class="w">            </span><span class="n">Balance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Balance</span><span class="p">,</span><span class="w"> </span><span class="n">Irrigation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Irrigation</span><span class="p">,</span>
+<span class="w">            </span><span class="n">SmoothedIrrigation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SmoothedIrrigation</span><span class="p">)</span>
+<span class="w">  </span><span class="nf">class</span><span class="p">(</span><span class="n">l</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Irrigation&quot;</span>
+<span class="w">  </span><span class="kr">return</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="n">print.Irrigation</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kc">...</span><span class="p">){</span>
+<span class="w">  </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Irrigation&quot;</span><span class="p">)]</span>
+<span class="w">  </span><span class="nf">NextMethod</span><span class="p">()</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -555,11 +576,11 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="Bibliography.html"
+       href="output_test.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Bibliography</p>
+        <p class="prev-next-title">Output of the model</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

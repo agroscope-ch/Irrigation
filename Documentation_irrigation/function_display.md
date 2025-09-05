@@ -1,4 +1,4 @@
-#  $\texttt{balance_computation}$ R function
+# `balance_computation` R function
 
 Below, you can find the R code for the function `balance_computation`. The details of the algorithm are explained in the [previous section](section:description_algo).
 
