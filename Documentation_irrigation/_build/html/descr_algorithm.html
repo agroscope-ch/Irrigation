@@ -529,7 +529,7 @@ Q, &amp; \text{if } \texttt{start_flowering} \leq \texttt{DOY} &lt; \texttt{DayF
 <li><p>Constant at 100% between <span class="math notranslate nohighlight">\(\texttt{DayFolAreaMax}\)</span> and <span class="math notranslate nohighlight">\(\texttt{DOY} = 252\)</span>.</p></li>
 <li><p>Then linearly decreasing</p></li>
 </ul>
-<p>The polynomial is mimicking the Figure 1A of <span id="id1">[<a class="reference internal" href="Bibliography.html#id4" title="L. Cheng and R. Raba. Accumulation of macro- and micronutrients and nitrogen demand-supply relationship of ‘gala’/‘malling 26’ apple trees grown in sand culture. Journal of the American Society for Horticultural Science, 134(1):3–-13, 2009. doi:https://doi.org/10.21273/JASHS.134.1.3.">CR09</a>]</span>, describing the seasonal patterns of total leaf area per tree and considering 62 days from full bloom to maximal extend.</p>
+<p>The polynomial is mimicking the Figure 1A of <span id="id1">Cheng and Raba [<a class="reference internal" href="Bibliography.html#id4" title="L. Cheng and R. Raba. Accumulation of macro- and micronutrients and nitrogen demand-supply relationship of ‘gala’/‘malling 26’ apple trees grown in sand culture. Journal of the American Society for Horticultural Science, 134(1):3–-13, 2009. doi:https://doi.org/10.21273/JASHS.134.1.3.">2009</a>]</span>, describing the seasonal patterns of total leaf area per tree and considering 62 days from full bloom to maximal extend.</p>
 <p>We then transform it back to a proportion (and not a percentage)</p>
 <div class="math notranslate nohighlight">
 \[
@@ -600,12 +600,12 @@ Q, &amp; \text{if } \texttt{start_flowering} \leq \texttt{DOY} &lt; \texttt{DayF
 \[
 R_s = \texttt{Rad}\cdot 0.0864
 \]</div>
-<p>Then, <span class="math notranslate nohighlight">\(R_n\)</span> can be approximated in Switzerland using the following equation (see <span id="id2">[<a class="reference internal" href="Bibliography.html#id5" title="J. A. Davies. A note on the relationship between net radiation and solar radiation. Quarterly Journal of the Royal Meteorological Society, 93(395):109–115, 1967. doi:https://doi.org/10.1002/qj.49709339511.">Dav67</a>]</span>, equation (6))</p>
+<p>Then, <span class="math notranslate nohighlight">\(R_n\)</span> can be approximated in Switzerland using the following equation (see <span id="id2">Davies [<a class="reference internal" href="Bibliography.html#id5" title="J. A. Davies. A note on the relationship between net radiation and solar radiation. Quarterly Journal of the Royal Meteorological Society, 93(395):109–115, 1967. doi:https://doi.org/10.1002/qj.49709339511.">1967</a>]</span>, equation (6))</p>
 <div class="math notranslate nohighlight">
 \[
 R_n = 0.617 \cdot R_s - 1.004
 \]</div>
-<p>More precisely, the equation given by <span id="id3">Davies [<a class="reference internal" href="Bibliography.html#id5" title="J. A. Davies. A note on the relationship between net radiation and solar radiation. Quarterly Journal of the Royal Meteorological Society, 93(395):109–115, 1967. doi:https://doi.org/10.1002/qj.49709339511.">Dav67</a>]</span> is provided in <em>gram calories</em>, abreviated <span class="math notranslate nohighlight">\(\text{gr cal}\)</span> by <span class="math notranslate nohighlight">\(\text{cm}^-2\)</span> and by day and is</p>
+<p>More precisely, the equation given by <span id="id3">Davies [<a class="reference internal" href="Bibliography.html#id5" title="J. A. Davies. A note on the relationship between net radiation and solar radiation. Quarterly Journal of the Royal Meteorological Society, 93(395):109–115, 1967. doi:https://doi.org/10.1002/qj.49709339511.">1967</a>]</span> is provided in <em>gram calories</em>, abreviated <span class="math notranslate nohighlight">\(\text{gr cal}\)</span> by <span class="math notranslate nohighlight">\(\text{cm}^-2\)</span> and by day and is</p>
 <div class="math notranslate nohighlight">
 \[
 R_n = 0.617 \cdot R_s - 24 \quad [\text{gr cal} \cdot \text{cm}^{-2} \cdot \text{day}^{-1}].
@@ -613,14 +613,14 @@ R_n = 0.617 \cdot R_s - 24 \quad [\text{gr cal} \cdot \text{cm}^{-2} \cdot \text
 <p>Note that <a class="reference external" href="https://en.wikipedia.org/wiki/Calorie"><em>gramcalories</em></a> is usually referred today to as <em>calorie</em> and is equal to 4.184 J. Finally, we have</p>
 <div class="math notranslate nohighlight">
 \[
-1\ \text{gr cal} \times \text{cm}^{-2} = 4.184 [\text{J} /\text{gr cal} ]  \cdot 10^4 [\text{cm}^2/\text{m}^2] \cdot 10^-6 [\text{MJ} / \text{J}] = 0.04184 \ \text{MJ} \cdot \text{m}^{−2},
+1\ \text{gr cal} \cdot \text{cm}^{-2} = 4.184 [\text{J} /\text{gr cal} ]  \cdot 10^4 [\text{cm}^2/\text{m}^2] \cdot 10^-6 [\text{MJ} / \text{J}] = 0.04184 \ \text{MJ} \cdot \text{m}^{−2},
 \]</div>
 <p>and hence <span class="math notranslate nohighlight">\(24 \cdot 0.04184 = 1.004\)</span> gives the correct intercept in the equation above.</p>
 </section>
 <hr class="docutils" />
 <section id="energy-absorbed-by-the-canopy">
 <h3>4. Energy absorbed by the canopy<a class="headerlink" href="#energy-absorbed-by-the-canopy" title="Link to this heading">#</a></h3>
-<p>We use the formula provided by <span id="id4">Pereira <em>et al.</em> [<a class="reference internal" href="Bibliography.html#id3" title="A. R. Pereira, S. R. Green, and N. A. Villa Nova. Relationships between single tree canopy and grass net radiations. Agricultural and Forest Meteorology, 142(1):45–49, 2007. doi:https://doi.org/10.1016/j.agrformet.2006.11.003.">PGVN07a</a>]</span> to deduce the total amount of net (all-wave) radiation absorbed by the leaf canopy, depending on the category <span class="math notranslate nohighlight">\(k\)</span>.</p>
+<p>We use the formula provided by <span id="id4">Pereira <em>et al.</em> [<a class="reference internal" href="Bibliography.html#id3" title="A. R. Pereira, S. R. Green, and N. A. Villa Nova. Relationships between single tree canopy and grass net radiations. Agricultural and Forest Meteorology, 142(1):45–49, 2007. doi:https://doi.org/10.1016/j.agrformet.2006.11.003.">2007</a>]</span> to deduce the total amount of net (all-wave) radiation absorbed by the leaf canopy, depending on the category <span class="math notranslate nohighlight">\(k\)</span>.</p>
 <div class="math notranslate nohighlight">
 \[
 A_k = 0.303 \cdot \text{LA}_k \cdot R_n
@@ -812,7 +812,7 @@ T_k^\text{mat} + \text{Evap}_k &amp; \text{otherwise}
   <div class="footer-item">
     
 <p class="component-author">
-By Philippe Monney and Matthieu Wilhelm
+By Philippe Monney and Matthieu Wilhelm, 2025
 </p>
 
   </div>
@@ -820,21 +820,20 @@ By Philippe Monney and Matthieu Wilhelm
   <div class="footer-item">
     
 
-  <p class="copyright">
+  </div>
+  
+  <div class="footer-item">
     
-      © Copyright 2023.
-      <br/>
+  </div>
+  
+  <div class="footer-item">
     
-  </p>
+<div class="extra_footer">
+  <div>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+</div>
 
-  </div>
-  
-  <div class="footer-item">
-    
-  </div>
-  
-  <div class="footer-item">
-    
+</div>
   </div>
   
 </div>

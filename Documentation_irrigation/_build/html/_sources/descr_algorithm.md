@@ -93,7 +93,7 @@ Interpolation logic:
 - Constant at 100% between $\texttt{DayFolAreaMax}$ and $\texttt{DOY} = 252$.
 - Then linearly decreasing
 
-The polynomial is mimicking the Figure 1A of {cite:p}`Cheng2009`, describing the seasonal patterns of total leaf area per tree and considering 62 days from full bloom to maximal extend.
+The polynomial is mimicking the Figure 1A of {cite:t}`Cheng2009`, describing the seasonal patterns of total leaf area per tree and considering 62 days from full bloom to maximal extend.
 
 
 We then transform it back to a proportion (and not a percentage)
@@ -174,7 +174,7 @@ $$
 R_s = \texttt{Rad}\cdot 0.0864
 $$
 
-Then, $R_n$ can be approximated in Switzerland using the following equation (see {cite:p}`Davies1967`, equation (6))
+Then, $R_n$ can be approximated in Switzerland using the following equation (see {cite:t}`Davies1967`, equation (6))
 
 $$
 R_n = 0.617 \cdot R_s - 1.004
@@ -189,7 +189,7 @@ $$
 Note that [_gramcalories_](https://en.wikipedia.org/wiki/Calorie) is usually referred today to as _calorie_ and is equal to 4.184 J. Finally, we have
 
 $$
-1\ \text{gr cal} \times \text{cm}^{-2} = 4.184 [\text{J} /\text{gr cal} ]  \cdot 10^4 [\text{cm}^2/\text{m}^2] \cdot 10^-6 [\text{MJ} / \text{J}] = 0.04184 \ \text{MJ} \cdot \text{m}^{−2},
+1\ \text{gr cal} \cdot \text{cm}^{-2} = 4.184 [\text{J} /\text{gr cal} ]  \cdot 10^4 [\text{cm}^2/\text{m}^2] \cdot 10^-6 [\text{MJ} / \text{J}] = 0.04184 \ \text{MJ} \cdot \text{m}^{−2},
 $$
 and hence $24 \cdot 0.04184 = 1.004$ gives the correct intercept in the equation above.  
 
