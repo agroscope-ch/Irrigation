@@ -430,10 +430,9 @@ The <strong>balance</strong> corresponds to the difference between water inputs 
 <hr class="docutils" />
 <section id="input-parameters">
 <h2>Input Parameters<a class="headerlink" href="#input-parameters" title="Link to this heading">#</a></h2>
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">balance_computation</span><span class="p">(</span><span class="n">Rel</span><span class="p">,</span><span class="w"> </span><span class="n">ET</span><span class="p">,</span><span class="w"> </span><span class="n">Rad</span><span class="p">,</span><span class="w"> </span><span class="n">Temp</span><span class="p">,</span><span class="w"> </span><span class="n">Rain</span><span class="p">,</span><span class="w"> </span><span class="n">DOY</span><span class="p">,</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">balance_computation</span><span class="p">(</span><span class="n">ET</span><span class="p">,</span><span class="w"> </span><span class="n">Rad</span><span class="p">,</span><span class="w"> </span><span class="n">Temp</span><span class="p">,</span><span class="w"> </span><span class="n">Rain</span><span class="p">,</span><span class="w"> </span><span class="n">DOY</span><span class="p">,</span>
 <span class="w">                    </span><span class="n">start_flowering</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">109</span><span class="p">,</span><span class="w"> </span><span class="n">DayFolAreaMax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">171</span><span class="p">,</span><span class="w"> </span>
-<span class="w">                    </span><span class="n">net_rain_effect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.66</span><span class="p">,</span><span class="w"> </span><span class="n">RAW</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">32</span><span class="p">,</span><span class="w"> </span>
-<span class="w">                    </span><span class="n">method_leaf_dev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span>
+<span class="w">                    </span><span class="n">net_rain_effect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.66</span><span class="p">,</span><span class="w"> </span><span class="n">RAW</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">32</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>For more details about the input parameters, see the <a class="reference internal" href="input_parameters.html#section-input-parameters"><span class="std std-ref">previous section</span></a></p>
@@ -444,38 +443,32 @@ The <strong>balance</strong> corresponds to the difference between water inputs 
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Rel</span></code></p></td>
-<td><p>Relative humidity (%).</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ET</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ET</span></code></p></td>
 <td><p>Evapotranspiration (mm/day).</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Rad</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Rad</span></code></p></td>
 <td><p>Global radiation (W/m²).</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Temp</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Temp</span></code></p></td>
 <td><p>Temperature (°C).</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Rain</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Rain</span></code></p></td>
 <td><p>Daily rainfall (mm).</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">DOY</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">DOY</span></code></p></td>
 <td><p>Day of the year.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">start_flowering</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">start_flowering</span></code></p></td>
 <td><p>Day of year when flowering starts (default 109).</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">DayFolAreaMax</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">DayFolAreaMax</span></code></p></td>
 <td><p>DOY when leaf area peaks (default 171).</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">net_rain_effect</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">net_rain_effect</span></code></p></td>
 <td><p>Reduction factor of rainfall due to nets.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">RAW</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">RAW</span></code></p></td>
 <td><p>Readily Available Water (mm).</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">method_leaf_dev</span></code></p></td>
-<td><p>Method to compute leaf development (1 or 2).</p></td>
 </tr>
 </tbody>
 </table>
@@ -484,7 +477,7 @@ The <strong>balance</strong> corresponds to the difference between water inputs 
 <hr class="docutils" />
 <section id="computation-steps">
 <h2>Computation Steps<a class="headerlink" href="#computation-steps" title="Link to this heading">#</a></h2>
-<p>In what follows, the variables <span class="math notranslate nohighlight">\(\texttt{Rel}, \texttt{ET}, \texttt{Rad}, \texttt{Temp}\)</span> and <span class="math notranslate nohighlight">\(\texttt{Rain}\)</span> are all <strong>daily measurements</strong>. It means that, when they are used in the following, they are implicitely depending on the day of the year. When it is useful, we use the index <span class="math notranslate nohighlight">\(t\)</span> to denote the current day, <span class="math notranslate nohighlight">\(t-1\)</span> to denote the previous one and <span class="math notranslate nohighlight">\(t_0\)</span> to denote the first day when the measurements start.</p>
+<p>In what follows, the variables <span class="math notranslate nohighlight">\(\texttt{ET}, \texttt{Rad}, \texttt{Temp}\)</span> and <span class="math notranslate nohighlight">\(\texttt{Rain}\)</span> are all <strong>daily measurements</strong>. It means that, when they are used in the following, they are implicitely depending on the day of the year. When it is useful, we use the index <span class="math notranslate nohighlight">\(t\)</span> to denote the current day, <span class="math notranslate nohighlight">\(t-1\)</span> to denote the previous one and <span class="math notranslate nohighlight">\(t_0\)</span> to denote the first day when the measurements start.</p>
 <p>We will use the Priestley–Taylor formula, that reads as follows:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -524,7 +517,7 @@ Q = \left(-0.00088183 \cdot D^2 + 0.15079 \cdot D\right)/6 \cdot 100.
 \text{LAI}^{\%}_\text{max} =
 \begin{cases}
 \texttt{DOY} \cdot 1.612903 - 175.806452, &amp; \text{if } \texttt{DOY} &lt; \texttt{start}_\texttt{flowering}, \\
-Q, &amp; \text{if } \texttt{start_flowering} \leq \texttt{DOY} &lt; \texttt{DayFolAreaMay}, \\
+Q, &amp; \text{if } \texttt{start_flowering} \leq \texttt{DOY} &lt; \texttt{DayFolAreaMax}, \\
 100, &amp; \text{if } \texttt{DayFolAreaMay} \leq \texttt{DOY} &lt; 252, \\
 \texttt{DOY} \cdot -0.7843 + 297.65, &amp; \text{if } \texttt{DOY} \geq 252.
 \end{cases}
@@ -532,7 +525,7 @@ Q, &amp; \text{if } \texttt{start_flowering} \leq \texttt{DOY} &lt; \texttt{DayF
 <p>Interpolation logic:</p>
 <ul class="simple">
 <li><p>Linear before <span class="math notranslate nohighlight">\(\texttt{start}_\texttt{flowering}\)</span></p></li>
-<li><p>Polynomial between <span class="math notranslate nohighlight">\(\texttt{start}_\texttt{flowering}\)</span> and \texttt{DayFolAreaMax}</p></li>
+<li><p>Polynomial between <span class="math notranslate nohighlight">\(\texttt{start}_\texttt{flowering}\)</span> and <span class="math notranslate nohighlight">\(\texttt{DayFolAreaMax}\)</span></p></li>
 <li><p>Constant at 100% between <span class="math notranslate nohighlight">\(\texttt{DayFolAreaMax}\)</span> and <span class="math notranslate nohighlight">\(\texttt{DOY} = 252\)</span>.</p></li>
 <li><p>Then linearly decreasing</p></li>
 </ul>
@@ -612,15 +605,15 @@ R_s = \texttt{Rad}\cdot 0.0864
 \[
 R_n = 0.617 \cdot R_s - 1.004
 \]</div>
-<p>More precisely, the equation given by <span id="id3">Davies [<a class="reference internal" href="Bibliography.html#id5" title="J. A. Davies. A note on the relationship between net radiation and solar radiation. Quarterly Journal of the Royal Meteorological Society, 93(395):109–115, 1967. doi:https://doi.org/10.1002/qj.49709339511.">Dav67</a>]</span> is provided in \emph{gramcalories}, abreviated <span class="math notranslate nohighlight">\(\text{gr cal}\)</span> by <span class="math notranslate nohighlight">\(\text{cm}^-2\)</span> and by day and is</p>
+<p>More precisely, the equation given by <span id="id3">Davies [<a class="reference internal" href="Bibliography.html#id5" title="J. A. Davies. A note on the relationship between net radiation and solar radiation. Quarterly Journal of the Royal Meteorological Society, 93(395):109–115, 1967. doi:https://doi.org/10.1002/qj.49709339511.">Dav67</a>]</span> is provided in <em>gram calories</em>, abreviated <span class="math notranslate nohighlight">\(\text{gr cal}\)</span> by <span class="math notranslate nohighlight">\(\text{cm}^-2\)</span> and by day and is</p>
 <div class="math notranslate nohighlight">
 \[
-R_n = 0.617 \cdot R_s - 24 \quad \text{gr cal} \cdot \text{cm}^{-2} \cdot \text{day}^{-1}.
+R_n = 0.617 \cdot R_s - 24 \quad [\text{gr cal} \cdot \text{cm}^{-2} \cdot \text{day}^{-1}].
 \]</div>
-<p>Note that <a class="reference external" href="https://en.wikipedia.org/wiki/Calorie">\emph{gramcalories}</a> is usually referred today to as \emph{calorie} and is equal to 4.184 J. Finally, we have</p>
+<p>Note that <a class="reference external" href="https://en.wikipedia.org/wiki/Calorie"><em>gramcalories</em></a> is usually referred today to as <em>calorie</em> and is equal to 4.184 J. Finally, we have</p>
 <div class="math notranslate nohighlight">
 \[
-1\ \text{gr cal} \times \text{cm}^{-2} = 4.184 [\text{J} /\text{gr cal} ]  \times 10^4 [\text{cm}^2/\text{m}^2] \times 10^-6 [\text{MJ} / \text{J}] = 0.04184 \ \text{MJ} \times \text{m}^{−2},
+1\ \text{gr cal} \times \text{cm}^{-2} = 4.184 [\text{J} /\text{gr cal} ]  \cdot 10^4 [\text{cm}^2/\text{m}^2] \cdot 10^-6 [\text{MJ} / \text{J}] = 0.04184 \ \text{MJ} \cdot \text{m}^{−2},
 \]</div>
 <p>and hence <span class="math notranslate nohighlight">\(24 \cdot 0.04184 = 1.004\)</span> gives the correct intercept in the equation above.</p>
 </section>
@@ -655,7 +648,7 @@ It can be estimated as a part of ET<span class="math notranslate nohighlight">\(
 \[
 \text{Evap}_k = f_k(\texttt{DOY}) \cdot \texttt{ET}, \text{ for }k = 0.5, 1, \ldots,2.5 ,
 \]</div>
-<p>where we have dropped (for clarity) the dependence on the Julian day \texttt{DOY}.</p>
+<p>where we have dropped (for clarity) the dependence on the Julian day <span class="math notranslate nohighlight">\(\texttt{DOY}\)</span>.</p>
 <p>On the other hand, we define <span class="math notranslate nohighlight">\(T_k^\text{mat}\)</span> as</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}

@@ -10,17 +10,15 @@ The **balance** corresponds to the difference between water inputs (rainfall, ir
 ## Input Parameters
 
 ``` r
-balance_computation(Rel, ET, Rad, Temp, Rain, DOY,
+balance_computation(ET, Rad, Temp, Rain, DOY,
                     start_flowering = 109, DayFolAreaMax = 171, 
-                    net_rain_effect = 0.66, RAW = 32, 
-                    method_leaf_dev = 1)
+                    net_rain_effect = 0.66, RAW = 32)
 ```
 
 For more details about the input parameters, see the [previous section](section:input_parameters)
 
 | Parameter         | Description                                      |
 |-------------------|--------------------------------------------------|
-| `Rel`             | Relative humidity (%).                           |
 | `ET`              | Evapotranspiration (mm/day).                     |
 | `Rad`             | Global radiation (W/m²).                         |
 | `Temp`            | Temperature (°C).                                |
@@ -30,13 +28,12 @@ For more details about the input parameters, see the [previous section](section:
 | `DayFolAreaMax`   | DOY when leaf area peaks (default 171).          |
 | `net_rain_effect` | Reduction factor of rainfall due to nets.        |
 | `RAW`             | Readily Available Water (mm).                    |
-| `method_leaf_dev` | Method to compute leaf development (1 or 2).     |
 
 ------------------------------------------------------------------------
 
 ## Computation Steps
 
-In what follows, the variables $\texttt{Rel}, \texttt{ET}, \texttt{Rad}, \texttt{Temp}$ and $\texttt{Rain}$ are all **daily measurements**. It means that, when they are used in the following, they are implicitely depending on the day of the year. When it is useful, we use the index $t$ to denote the current day, $t-1$ to denote the previous one and $t_0$ to denote the first day when the measurements start. 
+In what follows, the variables $\texttt{ET}, \texttt{Rad}, \texttt{Temp}$ and $\texttt{Rain}$ are all **daily measurements**. It means that, when they are used in the following, they are implicitely depending on the day of the year. When it is useful, we use the index $t$ to denote the current day, $t-1$ to denote the previous one and $t_0$ to denote the first day when the measurements start. 
 
 We will use the Priestley–Taylor formula, that reads as follows:
 
@@ -82,7 +79,7 @@ $$
 \text{LAI}^{\%}_\text{max} =
 \begin{cases}
 \texttt{DOY} \cdot 1.612903 - 175.806452, & \text{if } \texttt{DOY} < \texttt{start}_\texttt{flowering}, \\
-Q, & \text{if } \texttt{start_flowering} \leq \texttt{DOY} < \texttt{DayFolAreaMay}, \\
+Q, & \text{if } \texttt{start_flowering} \leq \texttt{DOY} < \texttt{DayFolAreaMax}, \\
 100, & \text{if } \texttt{DayFolAreaMay} \leq \texttt{DOY} < 252, \\
 \texttt{DOY} \cdot -0.7843 + 297.65, & \text{if } \texttt{DOY} \geq 252.
 \end{cases}
@@ -92,7 +89,7 @@ $$
 Interpolation logic:
 
 - Linear before $\texttt{start}_\texttt{flowering}$
-- Polynomial between $\texttt{start}_\texttt{flowering}$ and \texttt{DayFolAreaMax}
+- Polynomial between $\texttt{start}_\texttt{flowering}$ and $\texttt{DayFolAreaMax}$
 - Constant at 100% between $\texttt{DayFolAreaMax}$ and $\texttt{DOY} = 252$.
 - Then linearly decreasing
 
@@ -183,16 +180,16 @@ $$
 R_n = 0.617 \cdot R_s - 1.004
 $$
 
-More precisely, the equation given by {cite:t}`Davies1967` is provided in \emph{gramcalories}, abreviated $\text{gr cal}$ by $\text{cm}^-2$ and by day and is 
+More precisely, the equation given by {cite:t}`Davies1967` is provided in _gram calories_, abreviated $\text{gr cal}$ by $\text{cm}^-2$ and by day and is 
 
 $$
-R_n = 0.617 \cdot R_s - 24 \quad \text{gr cal} \cdot \text{cm}^{-2} \cdot \text{day}^{-1}.
+R_n = 0.617 \cdot R_s - 24 \quad [\text{gr cal} \cdot \text{cm}^{-2} \cdot \text{day}^{-1}].
 $$
 
-Note that [\emph{gramcalories}](https://en.wikipedia.org/wiki/Calorie) is usually referred today to as \emph{calorie} and is equal to 4.184 J. Finally, we have
+Note that [_gramcalories_](https://en.wikipedia.org/wiki/Calorie) is usually referred today to as _calorie_ and is equal to 4.184 J. Finally, we have
 
 $$
-1\ \text{gr cal} \times \text{cm}^{-2} = 4.184 [\text{J} /\text{gr cal} ]  \times 10^4 [\text{cm}^2/\text{m}^2] \times 10^-6 [\text{MJ} / \text{J}] = 0.04184 \ \text{MJ} \times \text{m}^{−2},
+1\ \text{gr cal} \times \text{cm}^{-2} = 4.184 [\text{J} /\text{gr cal} ]  \cdot 10^4 [\text{cm}^2/\text{m}^2] \cdot 10^-6 [\text{MJ} / \text{J}] = 0.04184 \ \text{MJ} \cdot \text{m}^{−2},
 $$
 and hence $24 \cdot 0.04184 = 1.004$ gives the correct intercept in the equation above.  
 
@@ -239,7 +236,7 @@ The evaporation is then estimated as
 $$
 \text{Evap}_k = f_k(\texttt{DOY}) \cdot \texttt{ET}, \text{ for }k = 0.5, 1, \ldots,2.5 ,
 $$
-where we have dropped (for clarity) the dependence on the Julian day \texttt{DOY}.
+where we have dropped (for clarity) the dependence on the Julian day $\texttt{DOY}$.
 
 On the other hand, we define $T_k^\text{mat}$ as 
 

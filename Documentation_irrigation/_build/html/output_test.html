@@ -403,14 +403,12 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="output-of-the-model">
 <h1>Output of the model<a class="headerlink" href="#output-of-the-model" title="Link to this heading">#</a></h1>
-<p>Here we show how to use the model on a data set. We have downloaded the data from the <a class="reference external" href="https://agrometeo.ch/meteorologie">Agrometeo</a> and we have used the data of Changins from 1<span class="math notranslate nohighlight">\(^\text{st}\)</span> January to 31 August 2025. The data can be found <a class="reference external" href="https://github.com/agroscope-ch/Irrigation/blob/c12420e9afa37f1c477c69a8ccf32c0f57ee3434/data/2025_Changins.csv">here</a>.</p>
+<p>Here we show how to use the model on a data set. We have downloaded the data from the <a class="reference external" href="https://agrometeo.ch/meteorologie">Agrometeo</a> and we have used the data of Changins from 1<span class="math notranslate nohighlight">\(^\text{st}\)</span> January to 31 August 2025. The data can be found <a class="reference external" href="https://github.com/agroscope-ch/Irrigation/blob/c12420e9afa37f1c477c69a8ccf32c0f57ee3434/data/2025_Changins.csv">here</a>. We use the code and display the result for the category <code class="docutils literal notranslate"><span class="pre">LAI_0.5</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">suppressWarnings</span><span class="p">(</span>
-<span class="w">  </span><span class="nf">suppressMessages</span><span class="p">({</span>
-<span class="w">  </span><span class="nf">library</span><span class="p">(</span><span class="n">repr</span><span class="p">)</span>
+<span class="nf">suppressMessages</span><span class="p">({</span>
 <span class="nf">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span>
-<span class="nf">options</span><span class="p">(</span><span class="n">repr.plot.width</span><span class="o">=</span><span class="m">8</span><span class="p">)</span>
 <span class="nf">source</span><span class="p">(</span><span class="s">&quot;../Model_irrigation_fun.R&quot;</span><span class="p">)</span>
 <span class="n">data_Changins</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.table</span><span class="p">(</span><span class="s">&quot;../data/2025_Changins.csv&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">sep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;;&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">header</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">T</span><span class="p">)</span>
 <span class="nf">names</span><span class="p">(</span><span class="n">data_Changins</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;date&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;temperature&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;rainfall&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;solar_radiation&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Evapotranspiration&quot;</span><span class="p">)</span>
@@ -461,7 +459,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/9d8baf1271368d874e03b274d4661b9a8ef0ba8d81ab713471b6448ad6f96ff3.png"><img alt="_images/9d8baf1271368d874e03b274d4661b9a8ef0ba8d81ab713471b6448ad6f96ff3.png" src="_images/9d8baf1271368d874e03b274d4661b9a8ef0ba8d81ab713471b6448ad6f96ff3.png" style="width: 480px; height: 420px;" />
+<a class="reference internal image-reference" href="_images/2a48fec580fa1c9b648167ec1709e43892de0f8a17cfaf0dcb7c625c56c0fe91.png"><img alt="_images/2a48fec580fa1c9b648167ec1709e43892de0f8a17cfaf0dcb7c625c56c0fe91.png" src="_images/2a48fec580fa1c9b648167ec1709e43892de0f8a17cfaf0dcb7c625c56c0fe91.png" style="width: 420px; height: 420px;" />
 </a>
 </div>
 </div>

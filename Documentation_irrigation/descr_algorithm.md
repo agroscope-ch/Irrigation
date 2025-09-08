@@ -183,13 +183,13 @@ $$
 More precisely, the equation given by {cite:t}`Davies1967` is provided in _gram calories_, abreviated $\text{gr cal}$ by $\text{cm}^-2$ and by day and is 
 
 $$
-R_n = 0.617 \cdot R_s - 24 \quad \text{gr cal} \cdot \text{cm}^{-2} \cdot \text{day}^{-1}.
+R_n = 0.617 \cdot R_s - 24 \quad [\text{gr cal} \cdot \text{cm}^{-2} \cdot \text{day}^{-1}].
 $$
 
-Note that [\emph{gramcalories}](https://en.wikipedia.org/wiki/Calorie) is usually referred today to as \emph{calorie} and is equal to 4.184 J. Finally, we have
+Note that [_gramcalories_](https://en.wikipedia.org/wiki/Calorie) is usually referred today to as _calorie_ and is equal to 4.184 J. Finally, we have
 
 $$
-1\ \text{gr cal} \times \text{cm}^{-2} = 4.184 [\text{J} /\text{gr cal} ]  \times 10^4 [\text{cm}^2/\text{m}^2] \times 10^-6 [\text{MJ} / \text{J}] = 0.04184 \ \text{MJ} \times \text{m}^{−2},
+1\ \text{gr cal} \times \text{cm}^{-2} = 4.184 [\text{J} /\text{gr cal} ]  \cdot 10^4 [\text{cm}^2/\text{m}^2] \cdot 10^-6 [\text{MJ} / \text{J}] = 0.04184 \ \text{MJ} \cdot \text{m}^{−2},
 $$
 and hence $24 \cdot 0.04184 = 1.004$ gives the correct intercept in the equation above.  
 

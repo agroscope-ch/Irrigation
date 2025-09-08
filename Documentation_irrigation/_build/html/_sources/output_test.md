@@ -12,17 +12,15 @@ kernelspec:
 
 # Output of the model
 
-Here we show how to use the model on a data set. We have downloaded the data from the [Agrometeo](https://agrometeo.ch/meteorologie) and we have used the data of Changins from 1$^\text{st}$ January to 31 August 2025. The data can be found [here](https://github.com/agroscope-ch/Irrigation/blob/c12420e9afa37f1c477c69a8ccf32c0f57ee3434/data/2025_Changins.csv). 
+Here we show how to use the model on a data set. We have downloaded the data from the [Agrometeo](https://agrometeo.ch/meteorologie) and we have used the data of Changins from 1$^\text{st}$ January to 31 August 2025. The data can be found [here](https://github.com/agroscope-ch/Irrigation/blob/c12420e9afa37f1c477c69a8ccf32c0f57ee3434/data/2025_Changins.csv). We use the code and display the result for the category `LAI_0.5`.
 
 
 
 ```{code-cell} r
 
 suppressWarnings(
-  suppressMessages({
-  library(repr)
+suppressMessages({
 library(tidyverse)
-options(repr.plot.width=8)
 source("../Model_irrigation_fun.R")
 data_Changins <- read.table("../data/2025_Changins.csv", sep = ";", header = T)
 names(data_Changins) <- c("date", "temperature", "rainfall", "solar_radiation", "Evapotranspiration")
