@@ -225,7 +225,7 @@ Note that this is the sap flow per tree and not per m$^{-2}$. If one wants to gi
 ### 6. Soil evaporation
 
 Now, starting from the measured value $\texttt{ET}$, we estimate the evaporation from the ground. 
-It can be estimated as a part of ET$_o$ that evolves during the growing season in function of the development of the canopy cover i.e. its growing shading effect until LAI max is reached. It is lower for young trees compared with adult trees. We have estimated third-order polynomial curves for each of the LAI category. The polynomials are provided in the code and you can find below a Figure with the curves together with the corresponding points they approximate.
+It can be estimated as a part of ET$_o$ that evolves during the growing season in function of the development of the canopy cover i.e. its growing shading effect until LAI max is reached. The canopy cover is lower for young trees compared with adult trees. We have estimated third-order polynomial curves for each of the LAI category. The polynomials are provided in the code and you can find below a Figure with the curves together with the corresponding points they approximate.
 
 ```{image} ../curves_f_DOY.png
 :align: center
